@@ -1,23 +1,24 @@
 
+JFLAGS = -g
+JC = javac
+.SUFFIXES: .java .class
+	$(JC) $(JFLAGS) $*.java
 
-all: BigInteger.class Calculator.class Test.class Tokenizer.class SymbolParser.class
+CLASSES = \
+	  BigInteger.java \
+	  Calculator.java \
+	  Tokenizer.java \
+	  SymbolParser.java \
+	  Test.java
 
-BigInteger.class: BigInteger.java
-	javac BigInteger.java
+default: classes
 
-Calculator.class: Calculator.java
-	javac Calculator.java
+classes: $(CLASSES:.java=.class)
 
-Tokenizer.class: Tokenizer.java
-	javac Tokenizer.java
+clean:
+	$(RM) *.class
 
-SymbolParser.class: SymbolParser.java
-	javac SymbolParser.java
-
-Test.class: Test.java
-	javac Test.java
-
-test: all Test.class
+test: classes Test.class
 	java -ea Test
 
 run:
