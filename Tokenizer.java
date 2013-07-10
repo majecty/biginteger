@@ -12,10 +12,28 @@ public class Tokenizer
   public class Token
   {
     private E_Token type;
+    private BigInteger data;
 
     public Token(E_Token type)
     {
       this.type = type;
+      data = new BigInteger(0);
+    }
+
+    public int GetValueInt()
+    {
+      assert type == E_Token.BIGINT;
+
+      return data.value;
+    }
+
+    public void AddTail(int num)
+    {
+      assert num >= 0;
+      assert num < 10;
+      assert type == E_Token.BIGINT;
+
+      data = new BigInteger(data.value * 10 + num);
     }
 
     public E_Token GetType()
@@ -26,6 +44,7 @@ public class Tokenizer
 
   public class Eater
   {
+    private Token currentToken;
     private E_Token type;
     private boolean isFull;
 
@@ -40,11 +59,12 @@ public class Tokenizer
       {
         return null;
       }
-      return new Token(type);
+      return currentToken;
     }
 
     public void Clear()
     {
+      currentToken = null;
       type = E_Token.NONE;
       isFull = false;
     }
@@ -66,17 +86,22 @@ public class Tokenizer
           if (character == '+')
           {
             type = E_Token.PLUS;
+            currentToken = new Token(E_Token.PLUS);
             isFull = true;
           }
           else if (Character.isDigit(character))
           {
+            currentToken = new Token(E_Token.BIGINT);
             type = E_Token.BIGINT;
+            currentToken.AddTail(Character.getNumericValue(character));
           }
           break;
         case PLUS:
-          // Not Implemented.
+          assert false;
           break;
         case BIGINT:
+          assert Character.isDigit(character);
+          currentToken.AddTail(Character.getNumericValue(character));
           // Not Implemented.
           break;
       }

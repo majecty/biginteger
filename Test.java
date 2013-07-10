@@ -7,6 +7,7 @@ public class Test
     System.out.println("Test start");
 
     TestSmallAdd();
+
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
     TokenizerCanIgnoreSpace();
@@ -14,8 +15,11 @@ public class Test
     TokenizerCanParsePlusAndBigIntTogether();
     TokenizerCanParsePlusBIGINTPlus();
 
+    TokenizerCanParseBigIntegerValue();
+
     System.out.println("Test end.");
   }
+
 
   public static void TestSmallAdd()
   {
@@ -93,5 +97,16 @@ public class Test
     assert tokenList.get(1).GetType() == Tokenizer.E_Token.BIGINT;
     assert tokenList.get(2).GetType() == Tokenizer.E_Token.PLUS;
     assert tokenList.size() == 3;
+  }
+
+  public static void TokenizerCanParseBigIntegerValue()
+  {
+    Tokenizer tokenizer = new Tokenizer();
+    String input = "378";
+
+    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+
+    assert tokenList.get(0).GetType() == Tokenizer.E_Token.BIGINT;
+    assert tokenList.get(0).GetValueInt() == 378;
   }
 }
