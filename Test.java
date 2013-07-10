@@ -67,4 +67,16 @@ public class Test
     assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
     assert tokenList.get(1).GetType() == Tokenizer.E_Token.PLUS;
   }
+
+  public static void TokenizerCanParsePlusAndBigIntTogether()
+  {
+    Tokenizer tokenizer = new Tokenizer();
+    String input = "+ 10";
+
+    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+
+    assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
+    assert tokenList.get(1).GetType() == Tokenizer.E_Token.BIGINT;
+    assert tokenList.size() == 2;
+  }
 }
