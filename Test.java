@@ -10,6 +10,7 @@ public class Test
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
     TokenizerCanIgnoreSpace();
+    TokenizerCanParseMoreThanTwoToken();
 
     System.out.println("Test end.");
   }
@@ -54,5 +55,16 @@ public class Test
     ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
 
     assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
+  }
+
+  public static void TokenizerCanParseMoreThanTwoToken()
+  {
+    Tokenizer tokenizer = new Tokenizer();
+    String input = "+ +";
+
+    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+
+    assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
+    assert tokenList.get(1).GetType() == Tokenizer.E_Token.PLUS;
   }
 }
