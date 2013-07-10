@@ -51,6 +51,10 @@ public class Tokenizer
 
     public boolean CanEat(char character)
     {
+      if (type == E_Token.BIGINT)
+      {
+        return Character.isDigit(character);
+      }
       return isFull == false;
     }
 
