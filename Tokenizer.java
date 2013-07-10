@@ -117,14 +117,6 @@ public class Tokenizer
       list.add(lastToken);
     }
 
-//    if (noSpaceInput.equals("+"))
-//    {
-//      list.add(new Token(E_Token.PLUS));
-//    }
-//    else
-//    {
-//      list.add(new Token(E_Token.BIGINT));
-//    }
     return list;
   }
 }
