@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Test
 {
@@ -6,6 +7,7 @@ public class Test
     System.out.println("Test start");
 
     TestSmallAdd();
+    TestParseTokenizer();
 
     System.out.println("Test end.");
   }
@@ -20,5 +22,15 @@ public class Test
     result = calc.Add(lhs, rhs);
 
     assert result.GetInt() == 6;
+  }
+
+  public static void TestParseTokenizer()
+  {
+    Tokenizer tokenizer = new Tokenizer();
+    String input = "+";
+
+    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+
+    assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
   }
 }
