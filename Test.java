@@ -7,7 +7,7 @@ public class Test
     System.out.println("Test start");
 
     TestSmallAdd();
-    TestParseTokenizer();
+    TokenizerCanParsePlusSymbol();
 
     System.out.println("Test end.");
   }
@@ -24,7 +24,7 @@ public class Test
     assert result.GetInt() == 6;
   }
 
-  public static void TestParseTokenizer()
+  public static void TokenizerCanParsePlusSymbol()
   {
     Tokenizer tokenizer = new Tokenizer();
     String input = "+";
