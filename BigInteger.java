@@ -9,6 +9,11 @@ public class BigInteger
     this.value = value;
   }
 
+  public int GetInt()
+  {
+    return value;
+  }
+
 	public static void main(String args[])
 	{
 		// 입력을 받기 위한 작업이다.

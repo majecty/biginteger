@@ -12,7 +12,7 @@ Test.class: Test.java
 	javac Test.java
 
 test: Test.class
-	java Test
+	java -ea Test
 
 run:
 	java BigInteger
