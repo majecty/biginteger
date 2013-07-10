@@ -27,10 +27,17 @@ public class Tokenizer
   {
   }
 
+  private String RemoveWhiteSpace(String line)
+  {
+    return line.replaceAll(" ", "");
+  }
+
   public ArrayList<Token> Parse(String line)
   {
+    String input = RemoveWhiteSpace(line);
+
     ArrayList<Token> list = new ArrayList<Token>();
-    if (line == "+")
+    if (input.equals("+"))
     {
       list.add(new Token(E_Token.PLUS));
     }
