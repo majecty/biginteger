@@ -14,7 +14,7 @@ Tokenizer.class: Tokenizer.java
 Test.class: Test.java
 	javac Test.java
 
-test: Test.class
+test: all Test.class
 	java -ea Test
 
 run:

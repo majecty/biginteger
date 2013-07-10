@@ -30,7 +30,14 @@ public class Tokenizer
   public ArrayList<Token> Parse(String line)
   {
     ArrayList<Token> list = new ArrayList<Token>();
-    list.add(new Token(E_Token.PLUS));
+    if (line == "+")
+    {
+      list.add(new Token(E_Token.PLUS));
+    }
+    else
+    {
+      list.add(new Token(E_Token.BIGINT));
+    }
     return list;
   }
 }
