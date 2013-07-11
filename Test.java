@@ -38,9 +38,9 @@ public class Test
     Tokenizer tokenizer = new Tokenizer();
     String input = "+";
 
-    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+    ArrayList<Token> tokenList = tokenizer.Parse(input);
 
-    assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
+    assert tokenList.get(0).GetType() == E_Token.PLUS;
   }
 
   public static void TokenizerCanParseInteger()
@@ -48,9 +48,9 @@ public class Test
     Tokenizer tokenizer = new Tokenizer();
     String input = "10";
 
-    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+    ArrayList<Token> tokenList = tokenizer.Parse(input);
 
-    assert tokenList.get(0).GetType() == Tokenizer.E_Token.BIGINT;
+    assert tokenList.get(0).GetType() == E_Token.BIGINT;
   }
 
   public static void TokenizerCanIgnoreSpace()
@@ -58,9 +58,9 @@ public class Test
     Tokenizer tokenizer = new Tokenizer();
     String input = "+ ";
 
-    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+    ArrayList<Token> tokenList = tokenizer.Parse(input);
 
-    assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
+    assert tokenList.get(0).GetType() == E_Token.PLUS;
   }
 
   public static void TokenizerCanParseMoreThanTwoToken()
@@ -68,10 +68,10 @@ public class Test
     Tokenizer tokenizer = new Tokenizer();
     String input = "+ +";
 
-    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+    ArrayList<Token> tokenList = tokenizer.Parse(input);
 
-    assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
-    assert tokenList.get(1).GetType() == Tokenizer.E_Token.PLUS;
+    assert tokenList.get(0).GetType() == E_Token.PLUS;
+    assert tokenList.get(1).GetType() == E_Token.PLUS;
   }
 
   public static void TokenizerCanParsePlusAndBigIntTogether()
@@ -79,10 +79,10 @@ public class Test
     Tokenizer tokenizer = new Tokenizer();
     String input = "+ 10";
 
-    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+    ArrayList<Token> tokenList = tokenizer.Parse(input);
 
-    assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
-    assert tokenList.get(1).GetType() == Tokenizer.E_Token.BIGINT;
+    assert tokenList.get(0).GetType() == E_Token.PLUS;
+    assert tokenList.get(1).GetType() == E_Token.BIGINT;
     assert tokenList.size() == 2;
   }
 
@@ -91,11 +91,11 @@ public class Test
     Tokenizer tokenizer = new Tokenizer();
     String input = "+ 10 +";
 
-    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+    ArrayList<Token> tokenList = tokenizer.Parse(input);
 
-    assert tokenList.get(0).GetType() == Tokenizer.E_Token.PLUS;
-    assert tokenList.get(1).GetType() == Tokenizer.E_Token.BIGINT;
-    assert tokenList.get(2).GetType() == Tokenizer.E_Token.PLUS;
+    assert tokenList.get(0).GetType() == E_Token.PLUS;
+    assert tokenList.get(1).GetType() == E_Token.BIGINT;
+    assert tokenList.get(2).GetType() == E_Token.PLUS;
     assert tokenList.size() == 3;
   }
 
@@ -104,9 +104,9 @@ public class Test
     Tokenizer tokenizer = new Tokenizer();
     String input = "378";
 
-    ArrayList<Tokenizer.Token> tokenList = tokenizer.Parse(input);
+    ArrayList<Token> tokenList = tokenizer.Parse(input);
 
-    assert tokenList.get(0).GetType() == Tokenizer.E_Token.BIGINT;
+    assert tokenList.get(0).GetType() == E_Token.BIGINT;
     assert tokenList.get(0).GetValueInt() == 378;
   }
 }

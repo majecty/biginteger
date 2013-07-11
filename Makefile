@@ -9,6 +9,8 @@ CLASSES = \
 	  BigInteger.java \
 	  Calculator.java \
 	  Tokenizer.java \
+	  Token.java \
+	  E_Token.java \
 	  SymbolParser.java \
 	  SymbolBase.java \
 	  Test.java
