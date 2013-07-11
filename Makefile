@@ -10,6 +10,7 @@ CLASSES = \
 	  Calculator.java \
 	  Tokenizer.java \
 	  SymbolParser.java \
+	  SymbolBase.java \
 	  Test.java
 
 default: classes
