@@ -1,4 +1,3 @@
-
 public abstract class SymbolBase
 {
   public abstract String GetName();
@@ -8,4 +7,3 @@ public abstract class SymbolBase
     return this.GetName().equals(rhsName);
   }
 }
-

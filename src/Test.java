@@ -108,5 +108,6 @@ public class Test
 
     assert tokenList.get(0).GetType() == E_Token.BIGINT;
     assert tokenList.get(0).GetValueInt() == 378;
+    assert 1 == 2;
   }
 }

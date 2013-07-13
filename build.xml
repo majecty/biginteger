@@ -1,0 +1,19 @@
+<project>
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes" />
+        <javac srcdir="src" destdir="build/classes"
+               source="1.7"/>
+    </target>
+
+    <target name="test" depends="compile">
+        <java classpath="build/classes" classname="Test" fork="true">
+            <assertions>
+                <enable />
+            </assertions>
+        </java>
+    </target>
+</project>

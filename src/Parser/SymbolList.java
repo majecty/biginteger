@@ -4,7 +4,7 @@ public class SymbolList
   {
       return new SymbolList();
   }
-  
+
   private SymbolList()
   {
   }
