@@ -4,6 +4,11 @@ public class SymbolList
   {
       return new SymbolList();
   }
+    
+  public static SymbolList Make(SymbolBase one, SymbolBase two, SymbolBase three)
+  {
+      return new SymbolList();
+  }
 
   private SymbolList()
   {

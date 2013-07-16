@@ -14,11 +14,38 @@ public class SymbolParser
     //ArrayList<Tokenizer.Token> statement = new ArrayList<Tokenizer.Token>();
     //
 
-    
     Op_Plus = new Symbol("Op_Plus");
     Op_Plus.AddSyntax(
             SymbolList.Make(new Token(E_Token.PLUS)));
+    Symbol NUM = new Symbol("NUM");
+    NUM.AddSyntax(
+            SymbolList.Make(new Token(E_Token.BIGINT)));
     Operator = new Symbol("Operator");
+
+    Statement testStatement = new Statement();
+    testStatement.AddSyntax(SymbolList.Make(NUM, Op_Plus, NUM));
+
+    
+  }
+
+  public class Statement
+  {
+    private ArrayList<SymbolList> syntaxList;
+
+    public Statement()
+    {
+      syntaxList = new ArrayList<SymbolList>();
+    }
+    
+    public boolean Parse(ArrayList<Token> tokenList)
+    {
+      return false;
+    }
+
+    public void AddSyntax(SymbolList syntax)
+    {
+      syntaxList.add(syntax);
+    }
   }
 
   public SymbolParser()
