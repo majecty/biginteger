@@ -1,28 +1,32 @@
+import java.util.ArrayList;
+
 public class SymbolList
 {
+  ArrayList<SymbolBase> symbols;
+    
   public static SymbolList Make(SymbolBase one)
   {
-      return new SymbolList();
+      SymbolList ret = new SymbolList();
+      ret.AddSymbol(one);
+      return ret;
   }
     
   public static SymbolList Make(SymbolBase one, SymbolBase two, SymbolBase three)
   {
-      return new SymbolList();
+      SymbolList ret = new SymbolList();
+      ret.AddSymbol(one);
+      ret.AddSymbol(two);
+      ret.AddSymbol(three);
+      return ret;
+  }
+
+  private void AddSymbol(SymbolBase symbol)
+  {
+      symbols.add(symbol);
   }
 
   private SymbolList()
   {
-  }
-
-  public SymbolList(SymbolBase one)
-  {
-  }
-
-  public SymbolList(SymbolBase one, SymbolBase two)
-  {
-  }
-
-  public SymbolList(SymbolBase one, SymbolBase two, SymbolBase three)
-  {
+      symbols = new ArrayList<SymbolBase>();
   }
 }

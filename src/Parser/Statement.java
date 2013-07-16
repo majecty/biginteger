@@ -11,6 +11,12 @@ public class Statement
     
     public boolean Parse(ArrayList<Token> tokenList)
     {
+        SymbolList firstSyntax = syntaxList.get(0);
+
+        for (int i=0; i<firstSyntax.Length; i++)
+        {
+            SymbolBase symbol = getsymbol;
+        }
         return false;
     }
 
