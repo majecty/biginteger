@@ -17,6 +17,8 @@ public class Test
 
     TokenizerCanParseBigIntegerValue();
 
+    ParserCanParseSimpleStatement();
+
     System.out.println("Test end.");
   }
 
@@ -112,6 +114,16 @@ public class Test
   
   public static void ParserCanParseSimpleStatement()
   {
-    
+    Symbol NUM = new Symbol("NUM");
+    NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
+    Statement testStatement = new Statement();
+    testStatement.AddSyntax(SymbolList.Make(NUM));
+
+    ArrayList<Token> inputTokenList = new ArrayList<Token>();
+    inputTokenList.add(new Token(E_Token.BIGINT));
+
+    boolean parseResult = testStatement.Parse(inputTokenList);
+
+    assert parseResult == true;
   }
 }
