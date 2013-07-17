@@ -4,7 +4,7 @@ public class Statement
 {
   private List<SymbolList> syntaxList;
   private BigInteger value;
-  private List<SymbolBase> parsedSymbols;
+  private List<SymbolData> parsedSymbols;
 
   public Statement()
   {
@@ -14,21 +14,21 @@ public class Statement
 
   public BigInteger GetValue()
   {
-    return parsedSymbols.get(0).GetValue();
+    return parsedSymbols.get(0).value;
   }
 
-  public List<Symbol> GetSymbols()
+  public List<SymbolData> GetSymbolDatas()
   {
     if (parsedSymbols == null)
     {
       return null;
     }
 
-    List<Symbol> ret = new ArrayList<Symbol>();
+    List<SymbolData> ret = new ArrayList<SymbolData>();
 
     for (int i=0; i<parsedSymbols.size(); i++)
     {
-      ret.add((Symbol)parsedSymbols.get(i));
+      ret.add(parsedSymbols.get(i));
     }
 
     return ret;

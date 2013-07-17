@@ -3,9 +3,9 @@ import java.util.*;
 public class Symbol extends SymbolBase
 {
   private String name;
-  private BigInteger value;
+  //private BigInteger value;
   private ArrayList<SymbolList> syntaxList;
-  protected List<SymbolBase> symbols;
+  protected List<SymbolData> parsedDatas;
 
   public static Symbol CreateSymbol(SymbolBase symbolBase)
   {
@@ -15,30 +15,36 @@ public class Symbol extends SymbolBase
   public String toString()
   {
     String log = "Name: name\n";
-    if (value != null)
+/*    if (value != null)
     {
       log += "Value: " + value.toString() + "\n";
-    }
+      }*/
     log += syntaxList.toString() + "\n";
-    log += symbols.toString();
+    log += parsedDatas.toString();
 
     return log;
+  }
+
+  public SymbolData ExtractData()
+  {
+    return new SymbolData(name, GetValue(),
+                          this, parsedDatas);
   }
 
   public SymbolBase GetClone()
   {
     Symbol newSymbol = new Symbol(name);
     
-    if (value != null)
+/*    if (value != null)
     {
       newSymbol.value = value.GetClone();  
-    }
+    }*/
     
     newSymbol.syntaxList = this.syntaxList;
 
-    for (int i=0; i<this.symbols.size(); i++)
+    for (int i=0; i<this.parsedDatas.size(); i++)
     {
-      newSymbol.symbols.add(symbols.get(i));
+      newSymbol.parsedDatas.add(parsedDatas.get(i));
     }
 
     return newSymbol;
@@ -53,18 +59,20 @@ public class Symbol extends SymbolBase
   {
     this.name = name;
     syntaxList = new ArrayList<SymbolList>();
-    symbols = new ArrayList<SymbolBase>();
-    value = null;
+    parsedDatas = new ArrayList<SymbolData>();
+    //    value = null;
   }
 
-  public BigInteger GetValue()
+  protected BigInteger GetValue()
   {
-    return value.GetClone();
+    return null;
+    //return value.GetClone();
   }
 
   public int Parse(List<Token> tokens)
   {
     assert tokens.size() > 0;
+    parsedDatas = new ArrayList<SymbolData>();
 
     SymbolList syntax = syntaxList.get(0);
     List<Token> originalTokens = tokens;
@@ -80,8 +88,9 @@ public class Symbol extends SymbolBase
       }
       else
       {
-        value = symbol.GetValue();
-        symbols.add(symbol.GetClone());
+        parsedDatas.add(symbol.ExtractData());
+        //        value = symbol.GetValue();
+        //parsedDatas.add(symbol.GetClone());
         tokens = tokens.subList(eatedNumber, tokens.size());
       }
 

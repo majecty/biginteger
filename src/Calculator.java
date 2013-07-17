@@ -9,13 +9,13 @@ public class Calculator
 
   public static BigInteger Run(String input)
   {
-    Symbol NUM = new Symbol("NUM");
-/*      {
-        public BigInteger GetValue()
-        {
-          return symbols.get(0).GetValue();
-        }
-        };*/
+    Symbol NUM = new Symbol("NUM")
+    {
+      protected BigInteger GetValue()
+      {
+        return parsedDatas.get(0).value;
+      }
+    };
     NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
 
     Symbol OP_PLUS = new Symbol("OP_PLUS");
@@ -41,7 +41,7 @@ public class Calculator
 
       statement.Parse(tokenList);
 
-      List<Symbol> symbols = statement.GetSymbols();
+      List<SymbolData> symbols = statement.GetSymbolDatas();
       if (symbols == null)
       {
         continue;
@@ -50,36 +50,36 @@ public class Calculator
       BigInteger ret = Calc(symbols);
       if (ret != null)
       {
-        return ret.GetClone();
+        return ret;
       }
     }
 
     return null;
   }
 
-  private static BigInteger Calc(List<Symbol> symbolList)
+  private static BigInteger Calc(List<SymbolData> symbolDataList)
   {
-    if (symbolList.size() == 1)
+    if (symbolDataList.size() == 1)
     {
-      Symbol symbol = symbolList.get(0);
-      BigInteger value = symbol.GetValue();
+      SymbolData symbol = symbolDataList.get(0);
+      BigInteger value = symbol.value;
 
-      return value.GetClone();
+      return value;
     }
-    else if (symbolList.size() == 3)
+    else if (symbolDataList.size() == 3)
     {
-      Symbol num1 = symbolList.get(0);
-      Symbol op = symbolList.get(1);
-      Symbol num2 = symbolList.get(2);
+      SymbolData num1 = symbolDataList.get(0);
+      SymbolData op = symbolDataList.get(1);
+      SymbolData num2 = symbolDataList.get(2);
 
-      if (num1.GetName() != "NUM" ||
-          op.GetName() != "OP_PLUS" ||
-          num2.GetName() != "NUM")
+      if (num1.name != "NUM" ||
+          op.name != "OP_PLUS" ||
+          num2.name != "NUM")
       {
         return null;
       }
 
-      return Add(num1.GetValue(), num2.GetValue());
+      return Add(num1.value, num2.value);
     }
 
     return null;

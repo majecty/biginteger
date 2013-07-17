@@ -28,10 +28,10 @@ public class SymbolList
     return ret;
   }
 
-  public List<SymbolBase>  Parse(List<Token> tokenList)
+  public List<SymbolData>  Parse(List<Token> tokenList)
   {
     assert tokenList.size() > 0;
-    List<SymbolBase> parsedSymbols = new ArrayList<SymbolBase>();
+    List<SymbolData> parsedSymbols = new ArrayList<SymbolData>();
 
     for (int i=0; i<symbols.size(); i++)
     {
@@ -49,7 +49,7 @@ public class SymbolList
       if (eatedToken < 1) break;
       else
       {
-        parsedSymbols.add(symbol);
+        parsedSymbols.add(symbol.ExtractData());
         tokenList = tokenList.subList(eatedToken, tokenList.size());
       }
 
@@ -64,7 +64,7 @@ public class SymbolList
 
   public SymbolBase Get(int i)
   {
-    return symbols.get(i).GetClone();
+    return symbols.get(i);
   }
 
   public int GetLength()
@@ -74,7 +74,7 @@ public class SymbolList
 
   private void AddSymbol(SymbolBase symbol)
   {
-    symbols.add(symbol.GetClone());
+    symbols.add(symbol);
   }
 
   private SymbolList()

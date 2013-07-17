@@ -3,7 +3,7 @@ import java.util.*;
 public abstract class SymbolBase
 {
   public abstract String GetName();
-  public abstract BigInteger GetValue();
+  protected abstract BigInteger GetValue();
 
   public boolean IsSame(SymbolBase rhs)
   {
@@ -14,5 +14,6 @@ public abstract class SymbolBase
   // Return number of eated token number
   public abstract int Parse(List<Token> tokens);
 
+  public abstract SymbolData ExtractData();
   public abstract SymbolBase GetClone();
 }

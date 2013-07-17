@@ -48,7 +48,13 @@ public class Token extends SymbolBase
     return 0;
   }
 
-  public BigInteger GetValue()
+  public SymbolData ExtractData()
+  {
+    return new SymbolData(type.toString(), data,
+                          this, null);
+  }
+
+  protected  BigInteger GetValue()
   {
     if (type == E_Token.BIGINT)
     {
