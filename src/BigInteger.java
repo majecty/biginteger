@@ -14,6 +14,11 @@ public class BigInteger
     return value;
   }
 
+  public BigInteger GetClone()
+  {
+    return new BigInteger(value);
+  }
+
 	public static void main(String args[])
 	{
 		// 입력을 받기 위한 작업이다.

@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Calculator
 {
-  public BigInteger Add(BigInteger lhs, BigInteger rhs)
+  public static BigInteger Add(BigInteger lhs, BigInteger rhs)
   {
     return new BigInteger(lhs.value + rhs.value);
   }
@@ -32,13 +32,20 @@ public class Calculator
     statements.add(addStatement);
     statements.add(onlyNumStatement);
 
+    Tokenizer tokenizer = new Tokenizer();
+    List<Token> tokenList = tokenizer.Parse(input);
+
     for (int i=0; i<statements.size(); i++)
     {
-      Tokenizer tokenizer = new Tokenizer();
-      List<Token> tokenList = tokenizer.Parse(input);
+      Statement statement = statements.get(i);
 
-      onlyNumStatement.Parse(tokenList);
-      List<Symbol> symbols = onlyNumStatement.GetSymbols();
+      statement.Parse(tokenList);
+
+      List<Symbol> symbols = statement.GetSymbols();
+      if (symbols == null)
+      {
+        continue;
+      }
 
       BigInteger ret = Calc(symbols);
       if (ret != null)
@@ -58,6 +65,21 @@ public class Calculator
       BigInteger value = symbol.GetValue();
 
       return value;
+    }
+    else if (symbolList.size() == 3)
+    {
+      Symbol num1 = symbolList.get(0);
+      Symbol op = symbolList.get(1);
+      Symbol num2 = symbolList.get(2);
+
+      if (num1.GetName() != "NUM" ||
+          op.GetName() != "OP_PLUS" ||
+          num2.GetName() != "NUM")
+      {
+        return null;
+      }
+
+      return Add(num1.GetValue(), num2.GetValue());
     }
 
     return null;

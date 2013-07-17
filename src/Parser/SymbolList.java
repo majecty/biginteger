@@ -30,10 +30,16 @@ public class SymbolList
 
   public List<SymbolBase>  Parse(List<Token> tokenList)
   {
+    assert tokenList.size() > 0;
     List<SymbolBase> parsedSymbols = new ArrayList<SymbolBase>();
 
     for (int i=0; i<symbols.size(); i++)
     {
+      if (tokenList.size() < 1)
+      {
+        break;
+      }
+
       SymbolBase symbol = symbols.get(i);
       int eatedToken = symbol.Parse(tokenList);
 
@@ -43,7 +49,8 @@ public class SymbolList
       if (eatedToken < 1) break;
       else
       {
-        parsedSymbols.add(symbol);
+        parsedSymbols.add(symbol.GetClone());
+        //parsedSymbols.add(symbol);
         tokenList = tokenList.subList(eatedToken, tokenList.size());
         //        tokenList.removeRange(0, eatedToken);
       }

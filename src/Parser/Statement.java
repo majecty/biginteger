@@ -19,6 +19,11 @@ public class Statement
 
   public List<Symbol> GetSymbols()
   {
+    if (parsedSymbols == null)
+    {
+      return null;
+    }
+
     List<Symbol> ret = new ArrayList<Symbol>();
 
     for (int i=0; i<parsedSymbols.size(); i++)

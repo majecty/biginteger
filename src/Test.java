@@ -33,9 +33,8 @@ public class Test
     BigInteger lhs = new BigInteger(3);
     BigInteger rhs = new BigInteger(3);
     BigInteger result = null;
-    Calculator calc = new Calculator();
 
-    result = calc.Add(lhs, rhs);
+    result = Calculator.Add(lhs, rhs);
 
     assert result.GetInt() == 6;
   }
@@ -84,13 +83,14 @@ public class Test
   public static void TokenizerCanParsePlusAndBigIntTogether()
   {
     Tokenizer tokenizer = new Tokenizer();
-    String input = "+ 10";
+    String input = "10 + 10";
 
     ArrayList<Token> tokenList = tokenizer.Parse(input);
 
-    assert tokenList.get(0).GetType() == E_Token.PLUS;
-    assert tokenList.get(1).GetType() == E_Token.BIGINT;
-    assert tokenList.size() == 2;
+    assert tokenList.get(0).GetType() == E_Token.BIGINT;
+    assert tokenList.get(1).GetType() == E_Token.PLUS;
+    assert tokenList.get(2).GetType() == E_Token.BIGINT;
+    assert tokenList.size() == 3;
   }
 
   public static void TokenizerCanParsePlusBIGINTPlus()
@@ -140,11 +140,12 @@ public class Test
     Op_PLUS.AddSyntax(SymbolList.Make(new Token(E_Token.PLUS)));
 
     Statement testStatement = new Statement();
-    testStatement.AddSyntax(SymbolList.Make(NUM, Op_PLUS));
+    testStatement.AddSyntax(SymbolList.Make(NUM, Op_PLUS, NUM));
 
     ArrayList<Token> inputTokenList = new ArrayList<Token>();
     inputTokenList.add(new Token(E_Token.BIGINT));
     inputTokenList.add(new Token(E_Token.PLUS));
+    inputTokenList.add(new Token(E_Token.BIGINT));
 
     boolean parseResult = testStatement.Parse(inputTokenList);
 
@@ -154,13 +155,13 @@ public class Test
   public static void ParserCanGetValueFromExpression()
   {
     //Symbol NUM = new Symbol("NUM");
-    Symbol NUM = new Symbol("NUM")
-      {
+    Symbol NUM = new Symbol("NUM");
+/*      {
         public BigInteger GetValue()
         {
           return symbols.get(0).GetValue();
         }
-      };
+        };*/
     NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
     Statement testStatement = new Statement();
     testStatement.AddSyntax(SymbolList.Make(NUM));
@@ -169,7 +170,9 @@ public class Test
     String input = "10";
 
     List<Token> tokenList = tokenizer.Parse(input);
-    testStatement.Parse(tokenList);
+    boolean parseSuccess = testStatement.Parse(tokenList);
+    
+    assert parseSuccess == true;
 
     BigInteger value = testStatement.GetValue();
 
@@ -187,10 +190,10 @@ public class Test
 
   public static void CalculatorCanAdd()
   {
-    String input = "10 + 10";
+    String input = "10 + 15";
 
     BigInteger result = Calculator.Run(input);
 
-    assert result.GetInt() == 20;
+    assert result.GetInt() == 2;
   }
 }
