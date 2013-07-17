@@ -1,19 +1,29 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Statement
 {
-  private ArrayList<SymbolList> syntaxList;
+  private List<SymbolList> syntaxList;
+  private BigInteger value;
+  private List<SymbolBase> symbols;
 
   public Statement()
   {
     syntaxList = new ArrayList<SymbolList>();
+    value = null;
   }
 
-  public boolean Parse(ArrayList<Token> tokenList)
+  public BigInteger GetValue()
+  {
+    return symbols.get(0).GetValue();
+  }
+
+  public boolean Parse(List<Token> tokenList)
   {
     SymbolList firstSyntax = syntaxList.get(0);
 
-    return firstSyntax.Parse(tokenList);
+    symbols = firstSyntax.Parse(tokenList);
+
+    return symbols != null;
     /*
       for (int i=0; i<firstSyntax.GetLength(); i++)
       {

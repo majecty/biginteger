@@ -3,6 +3,8 @@ import java.util.*;
 public abstract class SymbolBase
 {
   public abstract String GetName();
+  public abstract BigInteger GetValue();
+
   public boolean IsSame(SymbolBase rhs)
   {
     String rhsName = rhs.GetName();

@@ -21,9 +21,19 @@ public class Token extends SymbolBase
     Token token = tokens.get(0);
     if (this.IsSame(token))
     {
+      data = token.GetValue();
       return 1;
     }
     return 0;
+  }
+
+  public BigInteger GetValue()
+  {
+    if (type == E_Token.BIGINT)
+    {
+      return data;
+    }
+    return null;
   }
 
   public int GetValueInt()

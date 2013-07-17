@@ -3,7 +3,9 @@ import java.util.*;
 public class Symbol extends SymbolBase
 {
   private String name;
+  private BigInteger value;
   private ArrayList<SymbolList> syntaxList;
+  protected List<SymbolBase> symbols;
 
   public String GetName()
   {
@@ -14,6 +16,13 @@ public class Symbol extends SymbolBase
   {
     this.name = name;
     syntaxList = new ArrayList<SymbolList>();
+    symbols = new ArrayList<SymbolBase>();
+    value = null;
+  }
+
+  public BigInteger GetValue()
+  {
+    return null;
   }
 
   public int Parse(List<Token> tokens)
@@ -32,6 +41,7 @@ public class Symbol extends SymbolBase
       }
       else
       {
+        symbols.add(symbol);
         tokens = tokens.subList(eatedNumber, tokens.size());
       }
 

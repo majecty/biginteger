@@ -28,8 +28,10 @@ public class SymbolList
     return ret;
   }
 
-  public boolean Parse(List<Token> tokenList)
+  public List<SymbolBase>  Parse(List<Token> tokenList)
   {
+    List<SymbolBase> parsedSymbols = new ArrayList<SymbolBase>();
+
     for (int i=0; i<symbols.size(); i++)
     {
       SymbolBase symbol = symbols.get(i);
@@ -41,17 +43,18 @@ public class SymbolList
       if (eatedToken < 1) break;
       else
       {
+        parsedSymbols.add(symbol);
         tokenList = tokenList.subList(eatedToken, tokenList.size());
         //        tokenList.removeRange(0, eatedToken);
       }
 
       if (tokenList.size() == 0 && i == symbols.size() - 1)
       {
-        return true;
+        return parsedSymbols;
       }
     }
 
-    return false;
+    return null;
   }
 
   public SymbolBase Get(int i)

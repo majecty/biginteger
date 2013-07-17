@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Test
 {
@@ -19,6 +19,7 @@ public class Test
 
     ParserCanParseSimpleStatement();
     ParserCanParseSimpleMultiSymbol();
+    ParserCanGetValueFromExpression();
 
     System.out.println("Test end.");
   }
@@ -145,5 +146,30 @@ public class Test
     boolean parseResult = testStatement.Parse(inputTokenList);
 
     assert parseResult == true;
+  }
+
+  public static void ParserCanGetValueFromExpression()
+  {
+    //Symbol NUM = new Symbol("NUM");
+    Symbol NUM = new Symbol("NUM")
+      {
+        public BigInteger GetValue()
+        {
+          return symbols.get(0).GetValue();
+        }
+      };
+    NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
+    Statement testStatement = new Statement();
+    testStatement.AddSyntax(SymbolList.Make(NUM));
+
+    Tokenizer tokenizer = new Tokenizer();
+    String input = "10";
+
+    List<Token> tokenList = tokenizer.Parse(input);
+    testStatement.Parse(tokenList);
+
+    BigInteger value = testStatement.GetValue();
+
+    assert value.GetInt() == 10;
   }
 }
