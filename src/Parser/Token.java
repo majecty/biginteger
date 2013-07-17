@@ -16,6 +16,16 @@ public class Token extends SymbolBase
     return type.name();
   }
 
+  public SymbolBase GetClone()
+  {
+    Token ret = new Token(type);
+    if (data != null)
+    {
+      ret.data = data.GetClone();
+    }
+    return ret;
+  }
+
   public int Parse(List<Token> tokens)
   {
     Token token = tokens.get(0);
@@ -31,7 +41,7 @@ public class Token extends SymbolBase
   {
     if (type == E_Token.BIGINT)
     {
-      return data;
+      return data.GetClone();
     }
     return null;
   }

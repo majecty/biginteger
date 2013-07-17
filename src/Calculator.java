@@ -9,13 +9,13 @@ public class Calculator
 
   public static BigInteger Run(String input)
   {
-    Symbol NUM = new Symbol("NUM")
-      {
+    Symbol NUM = new Symbol("NUM");
+/*      {
         public BigInteger GetValue()
         {
           return symbols.get(0).GetValue();
         }
-      };
+        };*/
     NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
 
     Symbol OP_PLUS = new Symbol("OP_PLUS");
@@ -50,7 +50,7 @@ public class Calculator
       BigInteger ret = Calc(symbols);
       if (ret != null)
       {
-        return ret;
+        return ret.GetClone();
       }
     }
 
@@ -64,7 +64,7 @@ public class Calculator
       Symbol symbol = symbolList.get(0);
       BigInteger value = symbol.GetValue();
 
-      return value;
+      return value.GetClone();
     }
     else if (symbolList.size() == 3)
     {

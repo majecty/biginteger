@@ -16,6 +16,7 @@ public class Test
     TokenizerCanParsePlusBIGINTPlus();
 
     TokenizerCanParseBigIntegerValue();
+    TokenizerCanParseTwoInt();
 
     ParserCanParseSimpleStatement();
     ParserCanParseSimpleMultiSymbol();
@@ -117,6 +118,19 @@ public class Test
     assert tokenList.get(0).GetValueInt() == 378;
   }
 
+  public static void TokenizerCanParseTwoInt()
+  {
+    Tokenizer tokenizer = new Tokenizer();
+    String input = "378 + 183";
+
+    ArrayList<Token> tokenList = tokenizer.Parse(input);
+
+    assert tokenList.get(0).GetType() == E_Token.BIGINT;
+    assert tokenList.get(0).GetValueInt() == 378;
+    assert tokenList.get(2).GetType() == E_Token.BIGINT;
+    assert tokenList.get(2).GetValueInt() == 183;
+  }
+
   public static void ParserCanParseSimpleStatement()
   {
     Symbol NUM = new Symbol("NUM");
@@ -194,6 +208,6 @@ public class Test
 
     BigInteger result = Calculator.Run(input);
 
-    assert result.GetInt() == 2;
+    assert result.GetInt() == 25;
   }
 }

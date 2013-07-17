@@ -20,7 +20,7 @@ public class Symbol extends SymbolBase
 
     for (int i=0; i<this.symbols.size(); i++)
     {
-      newSymbol.symbols.add(this.symbols.get(i));
+      newSymbol.symbols.add(symbols.get(i));
     }
 
     //return this;
@@ -42,7 +42,8 @@ public class Symbol extends SymbolBase
 
   public BigInteger GetValue()
   {
-    return symbols.get(0).GetValue();
+    return value.GetClone();
+    //return symbols.get(0).GetValue();
   }
 
   public int Parse(List<Token> tokens)
@@ -63,6 +64,7 @@ public class Symbol extends SymbolBase
       }
       else
       {
+        value = symbol.GetValue();
         symbols.add(symbol.GetClone());
         tokens = tokens.subList(eatedNumber, tokens.size());
       }

@@ -14,8 +14,5 @@ public abstract class SymbolBase
   // Return number of eated token number
   public abstract int Parse(List<Token> tokens);
 
-  public SymbolBase GetClone()
-  {
-    return this;
-  }
+  public abstract SymbolBase GetClone();
 }
