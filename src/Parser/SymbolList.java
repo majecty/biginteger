@@ -49,7 +49,7 @@ public class SymbolList
       if (eatedToken < 1) break;
       else
       {
-        parsedSymbols.add(symbol.GetClone());
+        parsedSymbols.add(symbol);
         tokenList = tokenList.subList(eatedToken, tokenList.size());
       }
 
@@ -74,7 +74,7 @@ public class SymbolList
 
   private void AddSymbol(SymbolBase symbol)
   {
-    symbols.add(symbol);
+    symbols.add(symbol.GetClone());
   }
 
   private SymbolList()
