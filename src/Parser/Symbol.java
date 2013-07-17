@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Symbol extends SymbolBase
 {
@@ -14,6 +14,34 @@ public class Symbol extends SymbolBase
   {
     this.name = name;
     syntaxList = new ArrayList<SymbolList>();
+  }
+
+  public int Parse(List<Token> tokens)
+  {
+    SymbolList syntax = syntaxList.get(0);
+    List<Token> originalTokens = tokens;
+
+    for (int i=0; i<syntax.GetLength(); i++)
+    {
+      SymbolBase symbol = syntax.Get(i);
+      int eatedNumber = symbol.Parse(tokens);
+
+      if (eatedNumber < 1)
+      {
+        break;
+      }
+      else
+      {
+        tokens = tokens.subList(eatedNumber, tokens.size());
+      }
+
+      if (i == syntax.GetLength() - 1)
+      {
+        return originalTokens.size() - tokens.size();
+      }
+    }
+
+    return 0;
   }
 
   public void AddSyntax(SymbolList syntax)

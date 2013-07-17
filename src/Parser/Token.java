@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Token extends SymbolBase
 {
   private E_Token type;
@@ -11,7 +13,17 @@ public class Token extends SymbolBase
 
   public String GetName()
   {
-      return type.name();
+    return type.name();
+  }
+
+  public int Parse(List<Token> tokens)
+  {
+    Token token = tokens.get(0);
+    if (this.IsSame(token))
+    {
+      return 1;
+    }
+    return 0;
   }
 
   public int GetValueInt()

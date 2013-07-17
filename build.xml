@@ -7,7 +7,8 @@
         <mkdir dir="build/classes" />
         <javac srcdir="src" destdir="build/classes"
                source="1.6"
-               encoding="UTF-8"/>
+               encoding="UTF-8"
+               debug="true"/>
     </target>
 
     <target name="test" depends="compile">

@@ -8,16 +8,18 @@ public class Statement
     {
         syntaxList = new ArrayList<SymbolList>();
     }
-    
+
     public boolean Parse(ArrayList<Token> tokenList)
     {
         SymbolList firstSyntax = syntaxList.get(0);
 
-        for (int i=0; i<firstSyntax.Length; i++)
+        return firstSyntax.Parse(tokenList);
+/*
+        for (int i=0; i<firstSyntax.GetLength(); i++)
         {
-            SymbolBase symbol = getsymbol;
+            SymbolBase symbol = firstSyntax.Get(i);
         }
-        return false;
+*/
     }
 
     public void AddSyntax(SymbolList syntax)
