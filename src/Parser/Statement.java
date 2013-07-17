@@ -17,6 +17,18 @@ public class Statement
     return parsedSymbols.get(0).GetValue();
   }
 
+  public List<Symbol> GetSymbols()
+  {
+    List<Symbol> ret = new ArrayList<Symbol>();
+
+    for (int i=0; i<parsedSymbols.size(); i++)
+    {
+      ret.add((Symbol)parsedSymbols.get(i));
+    }
+
+    return ret;
+  }
+
   public boolean Parse(List<Token> tokenList)
   {
     SymbolList firstSyntax = syntaxList.get(0);

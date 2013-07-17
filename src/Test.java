@@ -177,6 +177,10 @@ public class Test
 
   public static void CalculatorCanGetValue()
   {
-    assert false;
+    String input = "10";
+
+    BigInteger result = Calculator.Run(input);
+
+    assert result.GetInt() == 10;
   }
 }
