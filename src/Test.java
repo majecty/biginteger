@@ -21,6 +21,8 @@ public class Test
     ParserCanParseSimpleMultiSymbol();
     ParserCanGetValueFromExpression();
 
+    CalculatorCanGetValue();
+
     System.out.println("Test end.");
   }
 
@@ -171,5 +173,10 @@ public class Test
     BigInteger value = testStatement.GetValue();
 
     assert value.GetInt() == 10;
+  }
+
+  public static void CalculatorCanGetValue()
+  {
+    assert false;
   }
 }
