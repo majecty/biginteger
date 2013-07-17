@@ -18,6 +18,7 @@ public class Test
     TokenizerCanParseBigIntegerValue();
 
     ParserCanParseSimpleStatement();
+    ParserCanParseSimpleMultiSymbol();
 
     System.out.println("Test end.");
   }
@@ -111,7 +112,7 @@ public class Test
     assert tokenList.get(0).GetType() == E_Token.BIGINT;
     assert tokenList.get(0).GetValueInt() == 378;
   }
-  
+
   public static void ParserCanParseSimpleStatement()
   {
     Symbol NUM = new Symbol("NUM");
@@ -121,6 +122,25 @@ public class Test
 
     ArrayList<Token> inputTokenList = new ArrayList<Token>();
     inputTokenList.add(new Token(E_Token.BIGINT));
+
+    boolean parseResult = testStatement.Parse(inputTokenList);
+
+    assert parseResult == true;
+  }
+
+  static void ParserCanParseSimpleMultiSymbol()
+  {
+    Symbol NUM = new Symbol("NUM");
+    NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
+    Symbol Op_PLUS = new Symbol("OP_PLUS");
+    Op_PLUS.AddSyntax(SymbolList.Make(new Token(E_Token.PLUS)));
+
+    Statement testStatement = new Statement();
+    testStatement.AddSyntax(SymbolList.Make(NUM, Op_PLUS));
+
+    ArrayList<Token> inputTokenList = new ArrayList<Token>();
+    inputTokenList.add(new Token(E_Token.BIGINT));
+    inputTokenList.add(new Token(E_Token.PLUS));
 
     boolean parseResult = testStatement.Parse(inputTokenList);
 

@@ -11,6 +11,14 @@ public class SymbolList
     return ret;
   }
 
+  public static SymbolList Make(SymbolBase one, SymbolBase two)
+  {
+    SymbolList ret = new SymbolList();
+    ret.AddSymbol(one);
+    ret.AddSymbol(two);
+    return ret;
+  }
+
   public static SymbolList Make(SymbolBase one, SymbolBase two, SymbolBase three)
   {
     SymbolList ret = new SymbolList();
