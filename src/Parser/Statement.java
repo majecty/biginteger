@@ -4,7 +4,7 @@ public class Statement
 {
   private List<SymbolList> syntaxList;
   private BigInteger value;
-  private List<SymbolBase> symbols;
+  private List<SymbolBase> parsedSymbols;
 
   public Statement()
   {
@@ -14,22 +14,16 @@ public class Statement
 
   public BigInteger GetValue()
   {
-    return symbols.get(0).GetValue();
+    return parsedSymbols.get(0).GetValue();
   }
 
   public boolean Parse(List<Token> tokenList)
   {
     SymbolList firstSyntax = syntaxList.get(0);
 
-    symbols = firstSyntax.Parse(tokenList);
+    parsedSymbols = firstSyntax.Parse(tokenList);
 
-    return symbols != null;
-    /*
-      for (int i=0; i<firstSyntax.GetLength(); i++)
-      {
-      SymbolBase symbol = firstSyntax.Get(i);
-      }
-    */
+    return parsedSymbols != null;
   }
 
   public void AddSyntax(SymbolList syntax)
