@@ -18,16 +18,36 @@ public class Calculator
       };
     NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
 
-    Statement testStatement = new Statement();
-    testStatement.AddSyntax(SymbolList.Make(NUM));
+    Symbol OP_PLUS = new Symbol("OP_PLUS");
+    OP_PLUS.AddSyntax(SymbolList.Make(new Token(E_Token.PLUS)));
 
-    Tokenizer tokenizer = new Tokenizer();
-    List<Token> tokenList = tokenizer.Parse(input);
+    Statement onlyNumStatement = new Statement();
+    onlyNumStatement.AddSyntax(SymbolList.Make(NUM));
 
-    testStatement.Parse(tokenList);
-    List<Symbol> symbols = testStatement.GetSymbols();
+    Statement addStatement = new Statement();
+    addStatement.AddSyntax(SymbolList.Make(NUM, OP_PLUS, NUM));
 
-    return Calc(symbols);
+    List<Statement> statements = new ArrayList<Statement>();
+
+    statements.add(addStatement);
+    statements.add(onlyNumStatement);
+
+    for (int i=0; i<statements.size(); i++)
+    {
+      Tokenizer tokenizer = new Tokenizer();
+      List<Token> tokenList = tokenizer.Parse(input);
+
+      onlyNumStatement.Parse(tokenList);
+      List<Symbol> symbols = onlyNumStatement.GetSymbols();
+
+      BigInteger ret = Calc(symbols);
+      if (ret != null)
+      {
+        return ret;
+      }
+    }
+
+    return null;
   }
 
   private static BigInteger Calc(List<Symbol> symbolList)

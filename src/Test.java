@@ -22,6 +22,7 @@ public class Test
     ParserCanGetValueFromExpression();
 
     CalculatorCanGetValue();
+    CalculatorCanAdd();
 
     System.out.println("Test end.");
   }
@@ -182,5 +183,14 @@ public class Test
     BigInteger result = Calculator.Run(input);
 
     assert result.GetInt() == 10;
+  }
+
+  public static void CalculatorCanAdd()
+  {
+    String input = "10 + 10";
+
+    BigInteger result = Calculator.Run(input);
+
+    assert result.GetInt() == 20;
   }
 }
