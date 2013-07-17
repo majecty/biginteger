@@ -40,7 +40,7 @@ public class SymbolList
         break;
       }
 
-      SymbolBase symbol = symbols.get(i);
+      SymbolBase symbol = Get(i);
       int eatedToken = symbol.Parse(tokenList);
 
       assert eatedToken <= tokenList.size();
@@ -50,9 +50,7 @@ public class SymbolList
       else
       {
         parsedSymbols.add(symbol.GetClone());
-        //parsedSymbols.add(symbol);
         tokenList = tokenList.subList(eatedToken, tokenList.size());
-        //        tokenList.removeRange(0, eatedToken);
       }
 
       if (tokenList.size() == 0 && i == symbols.size() - 1)
@@ -66,7 +64,7 @@ public class SymbolList
 
   public SymbolBase Get(int i)
   {
-    return symbols.get(i);
+    return symbols.get(i).GetClone();
   }
 
   public int GetLength()

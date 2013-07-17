@@ -5,6 +5,17 @@ public class Token extends SymbolBase
   private E_Token type;
   private BigInteger data;
 
+  public String toString()
+  {
+    String log="Type: " + type.toString() + "\n";
+    if (data != null)
+    {
+      log += data.toString() + "\n";
+    }
+
+    return log;
+  }
+
   public Token(E_Token type)
   {
     this.type = type;

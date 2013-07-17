@@ -9,6 +9,12 @@ public class BigInteger
     this.value = value;
   }
 
+  public String toString()
+  {
+    String log = "BigInteger : " + value;
+    return log;
+  }
+
   public int GetInt()
   {
     return value;

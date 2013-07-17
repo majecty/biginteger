@@ -7,6 +7,24 @@ public class Symbol extends SymbolBase
   private ArrayList<SymbolList> syntaxList;
   protected List<SymbolBase> symbols;
 
+  public static Symbol CreateSymbol(SymbolBase symbolBase)
+  {
+    return null;
+  }
+
+  public String toString()
+  {
+    String log = "Name: name\n";
+    if (value != null)
+    {
+      log += "Value: " + value.toString() + "\n";
+    }
+    log += syntaxList.toString() + "\n";
+    log += symbols.toString();
+
+    return log;
+  }
+
   public SymbolBase GetClone()
   {
     Symbol newSymbol = new Symbol(name);
@@ -23,7 +41,6 @@ public class Symbol extends SymbolBase
       newSymbol.symbols.add(symbols.get(i));
     }
 
-    //return this;
     return newSymbol;
   }
 
@@ -43,7 +60,6 @@ public class Symbol extends SymbolBase
   public BigInteger GetValue()
   {
     return value.GetClone();
-    //return symbols.get(0).GetValue();
   }
 
   public int Parse(List<Token> tokens)

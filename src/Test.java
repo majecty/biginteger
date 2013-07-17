@@ -168,14 +168,7 @@ public class Test
 
   public static void ParserCanGetValueFromExpression()
   {
-    //Symbol NUM = new Symbol("NUM");
     Symbol NUM = new Symbol("NUM");
-/*      {
-        public BigInteger GetValue()
-        {
-          return symbols.get(0).GetValue();
-        }
-        };*/
     NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
     Statement testStatement = new Statement();
     testStatement.AddSyntax(SymbolList.Make(NUM));
