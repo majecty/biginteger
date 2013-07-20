@@ -24,6 +24,7 @@ public class Test
 
     CalculatorCanGetValue();
     CalculatorCanAdd();
+    CalculatorCanAddTestMany();
 
     System.out.println("Test end.");
   }
@@ -208,5 +209,32 @@ public class Test
     BigInteger result = Calculator.Run(input);
 
     assert result.GetInt() == 25;
+  }
+
+  public static void CalculatorCanAddTestMany()
+  {
+    String input = "10 + 15";
+    String input2 = "10 + 5";
+    String input3 = "10 + 12315";
+    String input4 = "1 + 15";
+    String input5 = "0 + 15";
+    String input6 = "910 + 15";
+    String input7 = "120 + 17";
+
+    BigInteger result = Calculator.Run(input);
+    BigInteger result2 = Calculator.Run(input2);
+    BigInteger result3 = Calculator.Run(input3);
+    BigInteger result4 = Calculator.Run(input4);
+    BigInteger result5 = Calculator.Run(input5);
+    BigInteger result6 = Calculator.Run(input6);
+    BigInteger result7 = Calculator.Run(input7);
+
+    assert result.GetInt() == 25;
+    assert result2.GetInt() == 15;
+    assert result3.GetInt() == 12325;
+    assert result4.GetInt() == 16;
+    assert result5.GetInt() == 15;
+    assert result6.GetInt() == 925;
+    assert result7.GetInt() == 137;
   }
 }
