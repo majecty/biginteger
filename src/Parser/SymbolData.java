@@ -16,6 +16,7 @@ class SymbolData
     this.symbols = symbols;
   }
 
+
   public String toString()
   {
     String log = "Name: " + name + ", ";

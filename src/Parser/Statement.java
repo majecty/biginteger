@@ -14,6 +14,7 @@ public class Statement
 
   public BigInteger GetValue()
   {
+      System.out.println(parsedSymbols);
     return parsedSymbols.get(0).value;
   }
 
@@ -38,7 +39,7 @@ public class Statement
   {
     SymbolList firstSyntax = syntaxList.get(0);
 
-    parsedSymbols = firstSyntax.Parse(tokenList);
+    parsedSymbols = firstSyntax.ParseAll(tokenList);
 
     return parsedSymbols != null;
   }

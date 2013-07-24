@@ -18,6 +18,9 @@ public class Test
     TokenizerCanParseBigIntegerValue();
     TokenizerCanParseTwoInt();
 
+    SymbolCanParseOneToken();
+    SymbolCanParseTwoSyntax();
+
     ParserCanParseSimpleStatement();
     ParserCanParseSimpleMultiSymbol();
     ParserCanGetValueFromExpression();
@@ -132,6 +135,41 @@ public class Test
     assert tokenList.get(2).GetValueInt() == 183;
   }
 
+  public static void SymbolCanParseOneToken()
+  {
+      Symbol NUM = new Symbol("NUM");
+      NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
+
+      List<Token> inputTokenList = new ArrayList<Token>();
+      inputTokenList.add(new Token(E_Token.BIGINT));
+
+      int parsed = NUM.ParseIter(inputTokenList);
+
+      assert parsed == 1;
+  }
+
+  public static void SymbolCanParseTwoSyntax()
+  {
+      Symbol NUM = new Symbol("NUM");
+      NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
+      NUM.AddSyntax(SymbolList.Make(new Token(E_Token.PLUS),
+                  new Token(E_Token.BIGINT)));
+
+      List<Token> inputTokenList = new ArrayList<Token>();
+      inputTokenList.add(new Token(E_Token.BIGINT));
+      List<Token> inputTokenList2 = new ArrayList<Token>();
+      inputTokenList2.add(new Token(E_Token.PLUS));
+      inputTokenList2.add(new Token(E_Token.BIGINT));
+
+      int parsed = NUM.ParseIter(inputTokenList);
+      assert parsed == 1;
+
+      NUM.Reset();
+
+      parsed = NUM.ParseIter(inputTokenList2);
+      assert parsed == 2;
+  }
+
   public static void ParserCanParseSimpleStatement()
   {
     Symbol NUM = new Symbol("NUM");
@@ -143,6 +181,8 @@ public class Test
     inputTokenList.add(new Token(E_Token.BIGINT));
 
     boolean parseResult = testStatement.Parse(inputTokenList);
+
+    //System.out.println("Result is " + parseResult);
 
     assert parseResult == true;
   }
@@ -189,6 +229,8 @@ public class Test
     assert parseSuccess == true;
 
     BigInteger value = testStatement.GetValue();
+
+    System.out.println("Value is " + value.GetInt());
 
     assert value.GetInt() == 10;
   }
@@ -237,4 +279,5 @@ public class Test
     assert result6.GetInt() == 925;
     assert result7.GetInt() == 137;
   }
+
 }

@@ -2,6 +2,22 @@ import java.util.*;
 
 public class Calculator
 {
+    public static BigInteger GetValueFrom(Symbol symbol)
+    {
+        if (symbol.GetName() == "NUM")
+        {
+            List<SymbolData> parsedDatas = symbol.GetParsedDatas();
+            assert parsedDatas != null;
+            assert parsedDatas.size() != 0;
+            for (int i=0; i<parsedDatas.size(); i++)
+            {
+                return parsedDatas.get(0).value;
+            }
+        }
+
+        return null;
+    }
+
   public static BigInteger Add(BigInteger lhs, BigInteger rhs)
   {
     return new BigInteger(lhs.value + rhs.value);

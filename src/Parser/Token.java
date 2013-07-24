@@ -37,7 +37,24 @@ public class Token extends SymbolBase
     return ret;
   }
 
-  public int Parse(List<Token> tokens)
+  public boolean parsed = false;
+
+  public void Reset()
+  {
+      parsed = false;
+  }
+  public int ParseIter(List<Token> tokens)
+  {
+      if (parsed == true)
+      {
+          return 0;
+      }
+      
+      parsed = true;
+      return Parse(tokens);
+  }
+
+  private int Parse(List<Token> tokens)
   {
     Token token = tokens.get(0);
     if (this.IsSame(token))

@@ -25,6 +25,11 @@ public class Symbol extends SymbolBase
     return log;
   }
 
+  public List<SymbolData> GetParsedDatas()
+  {
+      return parsedDatas;
+  }
+
   public SymbolData ExtractData()
   {
     return new SymbolData(name, GetValue(),
@@ -39,8 +44,10 @@ public class Symbol extends SymbolBase
     {
       newSymbol.value = value.GetClone();  
     }*/
-    
-    newSymbol.syntaxList = this.syntaxList;
+    for (int i=0; i<syntaxList.size(); i++)
+    {
+        newSymbol.syntaxList.add(syntaxList.get(i).GetClone());
+    }
 
     for (int i=0; i<this.parsedDatas.size(); i++)
     {
@@ -65,43 +72,71 @@ public class Symbol extends SymbolBase
 
   protected BigInteger GetValue()
   {
-    return null;
+      return Calculator.GetValueFrom(this);
+    //return null;
     //return value.GetClone();
   }
 
-  public int Parse(List<Token> tokens)
+  public void Reset()
   {
-    assert tokens.size() > 0;
-    parsedDatas = new ArrayList<SymbolData>();
-
-    SymbolList syntax = syntaxList.get(0);
-    List<Token> originalTokens = tokens;
-
-    for (int i=0; i<syntax.GetLength(); i++)
-    {
-      SymbolBase symbol = syntax.Get(i);
-      int eatedNumber = symbol.Parse(tokens);
-
-      if (eatedNumber < 1)
-      {
-        break;
-      }
-      else
-      {
-        parsedDatas.add(symbol.ExtractData());
-        //        value = symbol.GetValue();
-        //parsedDatas.add(symbol.GetClone());
-        tokens = tokens.subList(eatedNumber, tokens.size());
-      }
-
-      if (i == syntax.GetLength() - 1)
-      {
-        return originalTokens.size() - tokens.size();
-      }
-    }
-
-    return 0;
+      iteration = 0;
+      parsedDatas = new ArrayList<SymbolData>();
   }
+
+  private int iteration = 0;
+
+  public int ParseIter(List<Token> tokens)
+  {
+      if (iteration >= syntaxList.size())
+      {
+          return 0;
+      }
+
+      SymbolList currentSyntax = syntaxList.get(iteration);
+      int num = currentSyntax.ParseIter(tokens);
+
+      if (num < 1)
+      {
+          iteration += 1;
+          return ParseIter(tokens);
+      }
+      parsedDatas = currentSyntax.ExtractParsedDatas();
+      return num;
+  }
+
+//  public int Parse(List<Token> tokens)
+//  {
+//    assert tokens.size() > 0;
+//    parsedDatas = new ArrayList<SymbolData>();
+//
+//    SymbolList syntax = syntaxList.get(0);
+//    List<Token> originalTokens = tokens;
+//
+//    for (int i=0; i<syntax.GetLength(); i++)
+//    {
+//      SymbolBase symbol = syntax.Get(i);
+//      int eatedNumber = symbol.Parse(tokens);
+//
+//      if (eatedNumber < 1)
+//      {
+//        break;
+//      }
+//      else
+//      {
+//        parsedDatas.add(symbol.ExtractData());
+//        //        value = symbol.GetValue();
+//        //parsedDatas.add(symbol.GetClone());
+//        tokens = tokens.subList(eatedNumber, tokens.size());
+//      }
+//
+//      if (i == syntax.GetLength() - 1)
+//      {
+//        return originalTokens.size() - tokens.size();
+//      }
+//    }
+//
+//    return 0;
+//  }
 
   public void AddSyntax(SymbolList syntax)
   {
