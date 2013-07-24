@@ -255,7 +255,7 @@ public class Test
 
   public static void CalculatorCanAddTestMany()
   {
-    String input = "10 + 15";
+    String input = "+10 + +15";
     String input2 = "10 + 5";
     String input3 = "10 + 12315";
     String input4 = "1 + 15";

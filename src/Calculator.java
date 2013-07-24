@@ -11,7 +11,7 @@ public class Calculator
             assert parsedDatas.size() != 0;
             for (int i=0; i<parsedDatas.size(); i++)
             {
-                SymbolData data = parsedDatas.get(0);
+                SymbolData data = parsedDatas.get(i);
                 if (data.name == "BIGINT")
                 {
                     return data.value;
@@ -31,14 +31,11 @@ public class Calculator
 
   public static BigInteger Run(String input)
   {
-    Symbol NUM = new Symbol("NUM")
-    {
-      protected BigInteger GetValue()
-      {
-        return parsedDatas.get(0).value;
-      }
-    };
+    Symbol NUM = new Symbol("NUM");
     NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
+    NUM.AddSyntax(SymbolList.Make(
+                new Token(E_Token.PLUS),
+                new Token(E_Token.BIGINT)));
 
     Symbol OP_PLUS = new Symbol("OP_PLUS");
     OP_PLUS.AddSyntax(SymbolList.Make(new Token(E_Token.PLUS)));
