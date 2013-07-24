@@ -11,8 +11,14 @@ public class Calculator
             assert parsedDatas.size() != 0;
             for (int i=0; i<parsedDatas.size(); i++)
             {
-                return parsedDatas.get(0).value;
+                SymbolData data = parsedDatas.get(0);
+                if (data.name == "BIGINT")
+                {
+                    return data.value;
+                }
             }
+
+            assert false;
         }
 
         return null;
