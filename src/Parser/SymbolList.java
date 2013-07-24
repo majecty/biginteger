@@ -39,39 +39,6 @@ public class SymbolList
     return ret;
   }
 
-  public int ParseIterOld(List<Token> tokenList)
-  {
-      return 0;
-////      Stack<SymbolBase> parseStack = new Stack<SymbolBase>();
-//      Stack<int> parsedTokenNum = new Stack<int>();
-//      int currentTokenIndex = 0;
-//
-//      List<Token> originalTokens = tokenList;
-//      List<Token> restTokens = tokenList;
-//      int currentSymbolIndex = 0;
-//
-//      while(true)
-//      {
-//          restTokens = restTokens.subList(currentTokenIndex, restTokens.size());
-//
-//          SymbolBase currentSymbol = Get(currentSymbolIndex);
-//
-//          int parsedNum = currentSymbol.ParseIter(restTokens);
-//
-//          if (parsedNum < 1)
-//          {
-//              currentSymbol.Reset();
-//              currentSymbolIndex -= 1;
-//              currentTokenIndex -= parsedTokenNum.pop();
-//          }
-//          else
-//          {
-//              currentSymbol += 1;
-//              currentTokenIndex += parsedNum;
-//          }
-//      }
-  }
-
   public void Reset()
   {
       for (int i=0; i<GetLength(); i++)
@@ -88,7 +55,6 @@ public class SymbolList
       {
           SymbolBase symbol = Get(i);
           SymbolData data = symbol.ExtractData();
-          //System.out.println(data);
           if (data.symbols == null)
           {
               ret += 1;
@@ -114,9 +80,7 @@ public class SymbolList
 
   public int ParseIter(List<Token> tokens)
   {
-      //System.out.println(tokens);
       boolean result = ParseRecursive(tokens, 0);
-      //System.out.println("ParseRecursive Result : " + result);
       if (result)
       {
           return GetEatedTokensNum();
@@ -129,24 +93,16 @@ public class SymbolList
 
   public boolean ParseRecursive(List<Token> tokenList, int i)
   {
-      //System.out.println("ParseRecursive : " + i);
       boolean isSymbolEnd = GetLength() == i;
       boolean isTokenEnd = tokenList.size() == 0;
 
       if (isSymbolEnd) return true;
       if (isTokenEnd) return false;
       
-//      if (isSymbolEnd && isTokenEnd) return true;
-//      if (isSymbolEnd || isTokenEnd) return false;
-
       SymbolBase symbol = Get(i);
-      //symbol.Reset();
 
-      int count = 0;
       while(true)
       {
-          count ++;
-          //System.out.println(count);
           int eatedTokenNum = symbol.ParseIter(tokenList);
           if (eatedTokenNum < 1)
           {
@@ -161,7 +117,6 @@ public class SymbolList
 
           if (result == true)
           {
-              //System.out.println(symbol);
               return true;
           }
       }
@@ -173,7 +128,7 @@ public class SymbolList
       while(true)
       {
           int result = ParseIter(tokenList);
-          //System.out.println("ParseIter Result : " + result);
+
           if (result < 1)
           {
               return null;
@@ -183,41 +138,6 @@ public class SymbolList
               return ExtractParsedDatas();
           }
       }
-  }
-
-  public List<SymbolData>  ParseAll_Old(List<Token> tokenList)
-  {
-      return null;
-//    assert tokenList.size() > 0;
-//    List<SymbolData> parsedSymbols = new ArrayList<SymbolData>();
-//
-//    for (int i=0; i<symbols.size(); i++)
-//    {
-//      if (tokenList.size() < 1)
-//      {
-//        break;
-//      }
-//
-//      SymbolBase symbol = Get(i);
-//      int eatedToken = symbol.Parse(tokenList);
-//
-//      assert eatedToken <= tokenList.size();
-//      assert eatedToken >= 0;
-//
-//      if (eatedToken < 1) break;
-//      else
-//      {
-//        parsedSymbols.add(symbol.ExtractData());
-//        tokenList = tokenList.subList(eatedToken, tokenList.size());
-//      }
-//
-//      if (tokenList.size() == 0 && i == symbols.size() - 1)
-//      {
-//        return parsedSymbols;
-//      }
-//    }
-//
-//    return null;
   }
 
   public SymbolBase Get(int i)

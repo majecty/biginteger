@@ -11,8 +11,6 @@ public abstract class SymbolBase
     return this.GetName().equals(rhsName);
   }
 
-  // Return number of eated token number
-//  public abstract int Parse(List<Token> tokens);
   public abstract int ParseIter(List<Token> tokens);
   public abstract void Reset();
 
