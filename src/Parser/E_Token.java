@@ -2,5 +2,6 @@ public enum E_Token
 {
   NONE,
   BIGINT,
-  PLUS
+  PLUS,
+  MINUS,
 }
