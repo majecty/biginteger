@@ -4,15 +4,53 @@ public class BigInteger
 {
   public int value;
 
+  private int[] data;
+
   public BigInteger(int value)
   {
     this.value = value;
+    this.data = new int[201];
+    Initialize();
+    GetFromInt(value);
   }
 
+  private void Initialize()
+  {
+      for (int i=0; i < data.length; i++)
+      {
+          data[i] = 0;
+      }
+  }
+
+  private void GetFromInt(int intVal)
+  {
+      int index = 0;
+      while(intVal > 0)
+      {
+          data[index] = intVal % 10;
+          intVal = intVal / 10;
+          index += 1;
+      }
+  }
   public String toString()
   {
-    String log = "BigInteger : " + value;
-    return log;
+    int firstDigitPos = data.length - 1;
+    for (; firstDigitPos >= 0; firstDigitPos-=1)
+    {
+        if (data[firstDigitPos] != 0)
+        {
+            break;
+        }
+    }
+
+    StringBuilder sb = new StringBuilder();
+
+    for (int i=firstDigitPos; i >= 0; i-=1)
+    {
+        sb.append(data[i]);
+    }
+
+    return sb.toString();
   }
 
   public int GetInt()

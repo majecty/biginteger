@@ -7,6 +7,7 @@ public class Test
     System.out.println("Test start");
 
     TestSmallAdd();
+    TestPrintBigInteger();
 
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
@@ -46,6 +47,13 @@ public class Test
     result = Calculator.Add(lhs, rhs);
 
     assert result.GetInt() == 6;
+  }
+
+  public static void TestPrintBigInteger()
+  {
+      BigInteger bigInt = new BigInteger(133);
+
+      assert bigInt.toString().equals("133");
   }
 
   public static void TokenizerCanParsePlusSymbol()
