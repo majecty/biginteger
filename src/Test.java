@@ -8,6 +8,7 @@ public class Test
 
     TestSmallAdd();
     TestPrintBigInteger();
+    TestPrintLong();
 
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
@@ -54,6 +55,17 @@ public class Test
       BigInteger bigInt = new BigInteger(133);
 
       assert bigInt.toString().equals("133");
+  }
+
+  public static void TestPrintLong()
+  {
+      BigInteger bigInt = new BigInteger(2);
+      for(int i=0; i<20; i++)
+      {
+          bigInt.Push(0);
+      }
+
+      assert bigInt.toString().equals("200000000000000000000");
   }
 
   public static void TokenizerCanParsePlusSymbol()

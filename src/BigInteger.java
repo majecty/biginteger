@@ -32,6 +32,18 @@ public class BigInteger
           index += 1;
       }
   }
+
+  public void Push(int lastDigit)
+  {
+      for (int i=data.length-1; i>0; i-=1)
+      {
+          data[i] = data[i-1];
+      }
+      data[0] = lastDigit;
+
+      value = value * 10 + lastDigit;
+  }
+
   public String toString()
   {
     int firstDigitPos = data.length - 1;
