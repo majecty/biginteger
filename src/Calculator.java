@@ -39,7 +39,7 @@ public class Calculator
 
   public static BigInteger Add(BigInteger lhs, BigInteger rhs)
   {
-    return new BigInteger(lhs.value + rhs.value);
+      return lhs.Add(rhs);
   }
 
   public static BigInteger Sub(BigInteger lhs, BigInteger rhs)

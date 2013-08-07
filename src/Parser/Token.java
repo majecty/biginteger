@@ -93,7 +93,14 @@ public class Token extends SymbolBase
     assert num < 10;
     assert type == E_Token.BIGINT;
 
-    data = new BigInteger(data.value * 10 + num);
+    if (data == null)
+    {
+        data = new BigInteger(num);
+    }
+    else
+    {
+        data.Push(num);
+    }
   }
 
   public E_Token GetType()
