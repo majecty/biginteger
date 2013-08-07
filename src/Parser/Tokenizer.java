@@ -50,6 +50,12 @@ public class Tokenizer
             currentToken = new Token(E_Token.PLUS);
             isFull = true;
           }
+          else if (character == '-')
+          {
+              type = E_Token.MINUS;
+              currentToken = new Token(E_Token.MINUS);
+              isFull = true;
+          }
           else if (Character.isDigit(character))
           {
             currentToken = new Token(E_Token.BIGINT);
