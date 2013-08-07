@@ -31,6 +31,7 @@ public class Test
     CalculatorCanAdd();
     CalculatorCanSub();
     CalculatorCanAddTestMany();
+    CalculatorCanSubTestMany();
 
     System.out.println("Test end.");
   }
@@ -309,5 +310,20 @@ public class Test
     assert result5.GetInt() == 15;
     assert result6.GetInt() == 925;
     assert result7.GetInt() == 137;
+  }
+
+  public static void CalculatorCanSubTestMany()
+  {
+      String input = "-10 - -20";
+      String input2 = "10 - -30";
+      String input3 = "-10 + - 30";
+
+      BigInteger result = Calculator.Run(input);
+      BigInteger result2 = Calculator.Run(input2);
+      BigInteger result3 = Calculator.Run(input3);
+
+      assert result.GetInt() == 10;
+      assert result2.GetInt() == 40;
+      assert result3.GetInt() == -40;
   }
 }
