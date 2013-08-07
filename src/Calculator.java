@@ -29,6 +29,11 @@ public class Calculator
     return new BigInteger(lhs.value + rhs.value);
   }
 
+  public static BigInteger Sub(BigInteger lhs, BigInteger rhs)
+  {
+      return new BigInteger(lhs.value - rhs.value);
+  }
+
   public static BigInteger Run(String input)
   {
     Symbol NUM = new Symbol("NUM");
@@ -40,16 +45,23 @@ public class Calculator
     Symbol OP_PLUS = new Symbol("OP_PLUS");
     OP_PLUS.AddSyntax(SymbolList.Make(new Token(E_Token.PLUS)));
 
+    Symbol OP_SUB = new Symbol("OP_SUB");
+    OP_SUB.AddSyntax(SymbolList.Make(new Token(E_Token.MINUS)));
+
     Statement onlyNumStatement = new Statement();
     onlyNumStatement.AddSyntax(SymbolList.Make(NUM));
 
     Statement addStatement = new Statement();
     addStatement.AddSyntax(SymbolList.Make(NUM, OP_PLUS, NUM));
 
+    Statement subStatement = new Statement();
+    subStatement.AddSyntax(SymbolList.Make(NUM, OP_SUB, NUM));
+
     List<Statement> statements = new ArrayList<Statement>();
 
     statements.add(addStatement);
     statements.add(onlyNumStatement);
+    statements.add(subStatement);
 
     Tokenizer tokenizer = new Tokenizer();
     List<Token> tokenList = tokenizer.Parse(input);
@@ -92,13 +104,22 @@ public class Calculator
       SymbolData num2 = symbolDataList.get(2);
 
       if (num1.name != "NUM" ||
-          op.name != "OP_PLUS" ||
           num2.name != "NUM")
       {
         return null;
       }
 
-      return Add(num1.value, num2.value);
+      if (op.name == "OP_PLUS")
+      {
+          return Add(num1.value, num2.value);
+      }
+
+      else if (op.name == "OP_SUB")
+      {
+          return Sub(num1.value, num2.value);
+      }
+
+      return null;
     }
 
     return null;
