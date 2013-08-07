@@ -10,6 +10,7 @@ public class Test
 
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
+    TokenizerCanParseMinusSymbol();
     TokenizerCanIgnoreSpace();
     TokenizerCanParseMoreThanTwoToken();
     TokenizerCanParsePlusAndBigIntTogether();
@@ -52,6 +53,16 @@ public class Test
     ArrayList<Token> tokenList = tokenizer.Parse(input);
 
     assert tokenList.get(0).GetType() == E_Token.PLUS;
+  }
+
+  public static void TokenizerCanParseMinusSymbol()
+  {
+      Tokenizer tokenizer = new Tokenizer();
+      String input = "-";
+
+      ArrayList<Token> tokenList = tokenizer.Parse(input);
+
+      assert tokenList.get(0).GetType() == E_Token.MINUS;
   }
 
   public static void TokenizerCanParseInteger()
@@ -279,5 +290,4 @@ public class Test
     assert result6.GetInt() == 925;
     assert result7.GetInt() == 137;
   }
-
 }
