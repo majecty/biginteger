@@ -6,6 +6,8 @@ public class BigInteger
 
   private int[] data;
 
+  private boolean isMinus = false;
+
   public BigInteger(int value)
   {
     this.value = value;
@@ -28,6 +30,7 @@ public class BigInteger
 
   private void Initialize()
   {
+      isMinus = false;
       for (int i=0; i < data.length; i++)
       {
           data[i] = 0;
@@ -36,6 +39,12 @@ public class BigInteger
 
   private void GetFromInt(int intVal)
   {
+      if (intVal < 0)
+      {
+         isMinus = true;
+         intVal = intVal * -1;
+      }
+
       int index = 0;
       while(intVal > 0)
       {
@@ -57,6 +66,67 @@ public class BigInteger
   }
 
   public BigInteger Add(BigInteger rhs)
+  {
+      BigInteger ret;
+      if (isMinus && rhs.isMinus)
+      {
+          ret = ScalarAdd(rhs);
+          ret.isMinus = true;
+      }
+      else if ((!isMinus) && (!rhs.isMinus))
+      {
+          ret = ScalarAdd(rhs);
+          ret.isMinus = false;
+      }
+      else
+      {
+          boolean isBigger = IsBiggerScalar(rhs);
+          if (isBigger)
+          {
+              ret = ScalarSub(rhs);
+              ret.isMinus = isMinus;
+          }
+          else
+          {
+              ret = rhs.ScalarSub(this);
+              ret.isMinus = rhs.isMinus;
+          }
+      }
+
+      return ret;
+  }
+
+  private boolean IsBiggerScalar(BigInteger rhs)
+  {
+      for (int i = data.length - 1; i >= 0; i-=1)
+      {
+          if (data[i] == rhs.data[i])
+          {
+              continue;
+          }
+
+          return data[i] > rhs.data[i];
+      }
+      return false;
+  }
+
+  private BigInteger ScalarSub(BigInteger rhs)
+  {
+      BigInteger result = new BigInteger(0);
+
+      for (int i=0; i < data.length - 1; i++)
+      {
+          if (data[i] < rhs.data[i])
+          {
+              data[i] = data[i] + 10;
+              data[i+1] -= 1;
+          }
+          result.data[i] = data[i] - rhs.data[i];
+      }
+      return result;
+  }
+
+  private BigInteger ScalarAdd(BigInteger rhs)
   {
       BigInteger newBigInt = new BigInteger(0);
       for (int i=0; i<data.length-1; i++)
