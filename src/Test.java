@@ -27,6 +27,7 @@ public class Test
     ParserCanGetValueFromExpression();
 
     CalculatorCanGetValue();
+    CalculatorCanGetMinusValue();
     CalculatorCanAdd();
     CalculatorCanSub();
     CalculatorCanAddTestMany();
@@ -254,6 +255,15 @@ public class Test
     BigInteger result = Calculator.Run(input);
 
     assert result.GetInt() == 10;
+  }
+
+  public static void CalculatorCanGetMinusValue()
+  {
+      String input = "-10";
+
+      BigInteger result = Calculator.Run(input);
+
+      assert result.GetInt() == -10;
   }
 
   public static void CalculatorCanAdd()
