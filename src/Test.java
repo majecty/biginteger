@@ -11,6 +11,7 @@ public class Test
     TestPrintLong();
     TestBigIntEquality();
     TestAddBigInteger();
+    TestAddNegative();
     TestAddLong();
 
     TokenizerCanParsePlusSymbol();
@@ -77,6 +78,17 @@ public class Test
       BigInteger rhs = new BigInteger(12321);
 
       BigInteger expected = new BigInteger(14753);
+      BigInteger actual = lhs.Add(rhs);
+
+      assert actual.IsEqual(expected);
+  }
+
+  public static void TestAddNegative()
+  {
+      BigInteger lhs = new BigInteger(-3);
+      BigInteger rhs = new BigInteger(5);
+
+      BigInteger expected = new BigInteger(2);
       BigInteger actual = lhs.Add(rhs);
 
       assert actual.IsEqual(expected);
