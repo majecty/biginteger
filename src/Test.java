@@ -9,6 +9,7 @@ public class Test
     TestSmallAdd();
     TestPrintBigInteger();
     TestPrintLong();
+    TestBigIntEquality();
 
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
@@ -66,6 +67,15 @@ public class Test
       }
 
       assert bigInt.toString().equals("200000000000000000000");
+  }
+
+
+  public static void TestBigIntEquality()
+  {
+      BigInteger lhs = new BigInteger(20);
+      BigInteger rhs = new BigInteger(20);
+
+      assert lhs.IsEqual(rhs);
   }
 
   public static void TokenizerCanParsePlusSymbol()

@@ -14,6 +14,18 @@ public class BigInteger
     GetFromInt(value);
   }
 
+  public boolean IsEqual(BigInteger rhs)
+  {
+      for(int i=0; i<data.length; i++)
+      {
+          if (data[i] != rhs.data[i])
+          {
+              return false;
+          }
+      }
+      return true;
+  }
+
   private void Initialize()
   {
       for (int i=0; i < data.length; i++)
