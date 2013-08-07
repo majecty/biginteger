@@ -28,6 +28,7 @@ public class Test
 
     CalculatorCanGetValue();
     CalculatorCanAdd();
+    CalculatorCanSub();
     CalculatorCanAddTestMany();
 
     System.out.println("Test end.");
@@ -262,6 +263,15 @@ public class Test
     BigInteger result = Calculator.Run(input);
 
     assert result.GetInt() == 25;
+  }
+
+  public static void CalculatorCanSub()
+  {
+      String input = "20 - 15";
+
+      BigInteger result = Calculator.Run(input);
+
+      assert result.GetInt() == 5;
   }
 
   public static void CalculatorCanAddTestMany()
