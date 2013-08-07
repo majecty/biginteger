@@ -10,6 +10,8 @@ public class Test
     TestPrintBigInteger();
     TestPrintLong();
     TestBigIntEquality();
+    TestAddBigInteger();
+    TestAddLong();
 
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
@@ -69,6 +71,33 @@ public class Test
       assert bigInt.toString().equals("200000000000000000000");
   }
 
+  public static void TestAddBigInteger()
+  {
+      BigInteger lhs = new BigInteger(2432);
+      BigInteger rhs = new BigInteger(12321);
+
+      BigInteger expected = new BigInteger(14753);
+      BigInteger actual = lhs.Add(rhs);
+
+      assert actual.IsEqual(expected);
+  }
+
+  public static void TestAddLong()
+  {
+      BigInteger lhs = new BigInteger(2);
+      BigInteger rhs = new BigInteger(3);
+
+      for (int i=0; i<20; i++)
+      {
+          lhs.Push(0);
+          rhs.Push(0);
+      }
+
+      String expected = "500000000000000000000";
+      String actual = lhs.Add(rhs).toString();
+
+      assert actual.equals(expected);
+  }
 
   public static void TestBigIntEquality()
   {

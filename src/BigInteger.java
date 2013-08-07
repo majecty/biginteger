@@ -56,6 +56,17 @@ public class BigInteger
       value = value * 10 + lastDigit;
   }
 
+  public BigInteger Add(BigInteger rhs)
+  {
+      BigInteger newBigInt = new BigInteger(0);
+      for (int i=0; i<data.length-1; i++)
+      {
+          newBigInt.data[i] += (data[i] + rhs.data[i]) % 10;
+          newBigInt.data[i+1] += (data[i] + rhs.data[i]) / 10;
+      }
+      return newBigInt;
+  }
+
   public String toString()
   {
     int firstDigitPos = data.length - 1;
