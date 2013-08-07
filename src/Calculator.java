@@ -9,12 +9,25 @@ public class Calculator
             List<SymbolData> parsedDatas = symbol.GetParsedDatas();
             assert parsedDatas != null;
             assert parsedDatas.size() != 0;
+
+            int minusCount = 0;
             for (int i=0; i<parsedDatas.size(); i++)
             {
                 SymbolData data = parsedDatas.get(i);
-                if (data.name == "BIGINT")
+                if (data.name == "MINUS")
                 {
-                    return data.value;
+                    minusCount += 1;
+                }
+                else if (data.name == "BIGINT")
+                {
+                    if (minusCount % 2 == 1)
+                    {
+                        return new BigInteger(data.value.value * -1);
+                    }
+                    else
+                    {
+                        return data.value;
+                    }
                 }
             }
 
@@ -40,6 +53,9 @@ public class Calculator
     NUM.AddSyntax(SymbolList.Make(new Token(E_Token.BIGINT)));
     NUM.AddSyntax(SymbolList.Make(
                 new Token(E_Token.PLUS),
+                new Token(E_Token.BIGINT)));
+    NUM.AddSyntax(SymbolList.Make(
+                new Token(E_Token.MINUS),
                 new Token(E_Token.BIGINT)));
 
     Symbol OP_PLUS = new Symbol("OP_PLUS");
