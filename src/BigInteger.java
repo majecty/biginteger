@@ -64,6 +64,7 @@ public class BigInteger
           newBigInt.data[i] += (data[i] + rhs.data[i]) % 10;
           newBigInt.data[i+1] += (data[i] + rhs.data[i]) / 10;
       }
+      newBigInt.value = value + rhs.value;
       return newBigInt;
   }
 
