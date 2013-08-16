@@ -129,10 +129,10 @@ public class Test
 
       System.out.println(bigInt1.Add(bigInt2).toString());
       assert bigInt1.Add(bigInt2).toString().equals("-30");
-      assert bigInt1.Add(bigInt3).toString().equals("10");
+      assert bigInt1.Add(bigInt3).toString().equals("13");
       assert bigInt1.Add(bigInt4).toString().equals("-6");
-      assert bigInt3.Add(bigInt2).toString().equals("-30");
-      assert bigInt4.Add(bigInt2).toString().equals("-30");
+      assert bigInt3.Add(bigInt2).toString().equals("3");
+      assert bigInt4.Add(bigInt2).toString().equals("-16");
 
   }
 

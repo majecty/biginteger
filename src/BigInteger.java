@@ -156,6 +156,11 @@ public class BigInteger
 
     StringBuilder sb = new StringBuilder();
 
+    if (isMinus == true)
+    {
+        sb.append('-');
+    }
+
     for (int i=firstDigitPos; i >= 0; i-=1)
     {
         sb.append(data[i]);
