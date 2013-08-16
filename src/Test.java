@@ -12,6 +12,7 @@ public class Test
     TestBigIntEquality();
     TestAddBigInteger();
     TestAddNegative();
+    TestMul();
     TestAddLong();
     TestManyAdd();
 
@@ -93,6 +94,19 @@ public class Test
       BigInteger actual = lhs.Add(rhs);
 
       assert actual.IsEqual(expected);
+  }
+
+  public static void TestMul()
+  {
+      BigInteger lhs = new BigInteger(4);
+      BigInteger rhs = new BigInteger(9);
+
+      BigInteger expected = new BigInteger(36);
+      BigInteger actual = lhs.Mul(rhs);
+
+      System.out.println(actual.toString());
+
+      assert actual.IsEqual(rhs);
   }
 
   public static void TestAddLong()

@@ -101,6 +101,11 @@ public class BigInteger
       return ret;
   }
 
+  public BigInteger Mul(BigInteger rhs)
+  {
+      return ScalarMul(rhs);
+  }
+
   private boolean IsBiggerScalar(BigInteger rhs)
   {
       for (int i = data.length - 1; i >= 0; i-=1)
@@ -140,6 +145,23 @@ public class BigInteger
           newBigInt.data[i+1] += (data[i] + rhs.data[i]) / 10;
       }
       newBigInt.value = value + rhs.value;
+      return newBigInt;
+  }
+
+  private BigInteger ScalarMul(BigInteger rhs)
+  {
+      BigInteger newBigInt = new BigInteger(0);
+      for (int i=0; i<data.length/2 - 1; i++)
+      {
+          int scalarAdder = rhs.data[i];
+          for (int j=0; j<data.length/2 - 1; j+=1)
+          {
+              int scalarResult = data[j] * scalarAdder;
+              newBigInt.data[j + i] = scalarResult % 10;
+              newBigInt.data[j + i + 1] = scalarResult / 10;
+          }
+      }
+
       return newBigInt;
   }
 
