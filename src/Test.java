@@ -13,6 +13,7 @@ public class Test
     TestAddBigInteger();
     TestAddNegative();
     TestAddLong();
+    TestManyAdd();
 
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
@@ -117,6 +118,22 @@ public class Test
       BigInteger rhs = new BigInteger(20);
 
       assert lhs.IsEqual(rhs);
+  }
+
+  public static void TestManyAdd()
+  {
+      BigInteger bigInt1 = new BigInteger(-10);
+      BigInteger bigInt2 = new BigInteger(-20);
+      BigInteger bigInt3 = new BigInteger(23);
+      BigInteger bigInt4 = new BigInteger(4);
+
+      System.out.println(bigInt1.Add(bigInt2).toString());
+      assert bigInt1.Add(bigInt2).toString().equals("-30");
+      assert bigInt1.Add(bigInt3).toString().equals("10");
+      assert bigInt1.Add(bigInt4).toString().equals("-6");
+      assert bigInt3.Add(bigInt2).toString().equals("-30");
+      assert bigInt4.Add(bigInt2).toString().equals("-30");
+
   }
 
   public static void TokenizerCanParsePlusSymbol()

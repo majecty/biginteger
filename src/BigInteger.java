@@ -65,6 +65,11 @@ public class BigInteger
       value = value * 10 + lastDigit;
   }
 
+  public BigInteger Sub(BigInteger rhs)
+  {
+      return null;
+  }
+
   public BigInteger Add(BigInteger rhs)
   {
       BigInteger ret;
