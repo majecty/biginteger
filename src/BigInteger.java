@@ -157,8 +157,8 @@ public class BigInteger
           for (int j=0; j<data.length/2 - 1; j+=1)
           {
               int scalarResult = data[j] * scalarAdder;
-              newBigInt.data[j + i] = scalarResult % 10;
-              newBigInt.data[j + i + 1] = scalarResult / 10;
+              newBigInt.data[j + i] += scalarResult % 10;
+              newBigInt.data[j + i + 1] += scalarResult / 10;
           }
       }
 

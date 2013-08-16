@@ -15,6 +15,7 @@ public class Test
     TestMul();
     TestAddLong();
     TestManyAdd();
+    TestManyMul();
 
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
@@ -104,9 +105,7 @@ public class Test
       BigInteger expected = new BigInteger(36);
       BigInteger actual = lhs.Mul(rhs);
 
-      System.out.println(actual.toString());
-
-      assert actual.IsEqual(rhs);
+      assert actual.IsEqual(expected);
   }
 
   public static void TestAddLong()
@@ -141,13 +140,25 @@ public class Test
       BigInteger bigInt3 = new BigInteger(23);
       BigInteger bigInt4 = new BigInteger(4);
 
-      System.out.println(bigInt1.Add(bigInt2).toString());
       assert bigInt1.Add(bigInt2).toString().equals("-30");
       assert bigInt1.Add(bigInt3).toString().equals("13");
       assert bigInt1.Add(bigInt4).toString().equals("-6");
       assert bigInt3.Add(bigInt2).toString().equals("3");
       assert bigInt4.Add(bigInt2).toString().equals("-16");
 
+  }
+
+  public static void TestManyMul()
+  {
+      BigInteger bigInt1 = new BigInteger(-10);
+      BigInteger bigInt2 = new BigInteger(-20);
+      BigInteger bigInt3 = new BigInteger(23);
+      BigInteger bigInt4 = new BigInteger(4);
+
+      assert bigInt1.Mul(bigInt2).toString().equals(200);
+      assert bigInt1.Mul(bigInt3).toString().equals(-230);
+      assert bigInt1.Mul(bigInt3).toString().equals(-40);
+      assert bigInt2.Mul(bigInt3).toString().equals(-460);
   }
 
   public static void TokenizerCanParsePlusSymbol()
