@@ -155,10 +155,10 @@ public class Test
       BigInteger bigInt3 = new BigInteger(23);
       BigInteger bigInt4 = new BigInteger(4);
 
-      assert bigInt1.Mul(bigInt2).toString().equals(200);
-      assert bigInt1.Mul(bigInt3).toString().equals(-230);
-      assert bigInt1.Mul(bigInt3).toString().equals(-40);
-      assert bigInt2.Mul(bigInt3).toString().equals(-460);
+      assert bigInt1.Mul(bigInt2).toString().equals("200");
+      assert bigInt1.Mul(bigInt3).toString().equals("-230");
+      assert bigInt1.Mul(bigInt4).toString().equals("-40");
+      assert bigInt2.Mul(bigInt3).toString().equals("-460");
   }
 
   public static void TokenizerCanParsePlusSymbol()

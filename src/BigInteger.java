@@ -103,7 +103,26 @@ public class BigInteger
 
   public BigInteger Mul(BigInteger rhs)
   {
-      return ScalarMul(rhs);
+      boolean isResultMinus = false;
+
+      if (isMinus && rhs.isMinus)
+      {
+          isResultMinus = false;
+      }
+      else if (isMinus || rhs.isMinus)
+      {
+          isResultMinus = true;
+      }
+      else
+      {
+          isResultMinus = false;
+      }
+
+      BigInteger scalarResult = ScalarMul(rhs);
+
+      scalarResult.isMinus = isResultMinus;
+
+      return scalarResult;
   }
 
   private boolean IsBiggerScalar(BigInteger rhs)
