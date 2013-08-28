@@ -13,6 +13,7 @@ public class Test
     TestAddBigInteger();
     TestAddNegative();
     TestMul();
+    TestMulMany();
     TestAddLong();
     TestManyAdd();
     TestManyMul();
@@ -106,6 +107,27 @@ public class Test
       BigInteger actual = lhs.Mul(rhs);
 
       assert actual.IsEqual(expected);
+  }
+
+  private static void MulHelper(int lhs, int rhs, int expected)
+  {
+      BigInteger bLhs = new BigInteger(lhs);
+      BigInteger bRhs = new BigInteger(rhs);
+
+
+      BigInteger bExpected = new BigInteger(expected);
+      BigInteger actual = bLhs.Mul(bRhs);
+
+      assert actual.IsEqual(bExpected);
+  }
+
+  public static void TestMulMany()
+  {
+      MulHelper(0, 3, 0);
+      MulHelper(-1, 3, -3);
+      MulHelper(1, -3, -3);
+      MulHelper(100, 20, 2000);
+      MulHelper(17, 20, 340);
   }
 
   public static void TestAddLong()
