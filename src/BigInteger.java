@@ -67,7 +67,30 @@ public class BigInteger
 
   public BigInteger Sub(BigInteger rhs)
   {
-      return null;
+      BigInteger ret;
+      if (isMinus == rhs.isMinus)
+      {
+          boolean isBigger = IsBiggerScalar(rhs);
+          if (isBigger)
+          {
+              ret = ScalarSub(rhs);
+              ret.isMinus = isMinus;
+          }
+          else
+          {
+              ret = rhs.ScalarSub(this);
+              ret.isMinus = !isMinus;
+          }
+      }
+      else
+      {
+          ret = ScalarAdd(rhs);
+          ret.isMinus = isMinus;
+      }
+
+      ret.value = value - rhs.value;
+
+      return ret;
   }
 
   public BigInteger Add(BigInteger rhs)

@@ -44,7 +44,7 @@ public class Calculator
 
   public static BigInteger Sub(BigInteger lhs, BigInteger rhs)
   {
-      return new BigInteger(lhs.value - rhs.value);
+      return lhs.Sub(rhs);
   }
 
   public static BigInteger Mul(BigInteger lhs, BigInteger rhs)
