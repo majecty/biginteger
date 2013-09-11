@@ -287,9 +287,5 @@ public class BigInteger
 	{
             BigInteger result = Calculator.Run(input);
             System.out.println(result.toString());
-		// 아래 코드는 입력을 정상적으로 받는지 테스트하는 부분이다.
-
-		// TODO : Main 함수를 이해했다면 아래 문장을 삭제하고 구현해라.
-		System.out.println("<< calculate 함수에서 " + input + "을 계산할 예정입니다 >>");
 	}
 }
