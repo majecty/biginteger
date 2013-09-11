@@ -458,10 +458,12 @@ public class Test
   public static void CalculatorCanSub()
   {
       String input = "20 - 15";
-
       BigInteger result = Calculator.Run(input);
-
       assert result.GetInt() == 5;
+
+      input = "20000000000 - 10000000000";
+      result = Calculator.Run(input);
+      assert result.toString().equals("10000000000");
   }
 
   public static void CalculatorCanMul()
