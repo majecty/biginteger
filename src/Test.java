@@ -39,6 +39,7 @@ public class Test
     CalculatorCanGetValue();
     CalculatorCanGetMinusValue();
     CalculatorCanAdd();
+    CalculatorCanAddLong();
     CalculatorCanSub();
     CalculatorCanAddTestMany();
     CalculatorCanSubTestMany();
@@ -76,6 +77,13 @@ public class Test
       assert bigInt.toString().equals("200000000000000000000");
   }
 
+  private static void TestAddHelper(BigInteger lhs, BigInteger rhs, BigInteger result)
+  {
+      BigInteger expected = lhs.Add(rhs);
+
+      assert result.IsEqual(expected);
+  }
+
   public static void TestAddBigInteger()
   {
       BigInteger lhs = new BigInteger(2432);
@@ -85,6 +93,18 @@ public class Test
       BigInteger actual = lhs.Add(rhs);
 
       assert actual.IsEqual(expected);
+
+      lhs = new BigInteger(1);
+      rhs = new BigInteger(2);
+      BigInteger result = new BigInteger(3);
+      for (int i=0; i<20; i++)
+      {
+          lhs.Push(0);
+          rhs.Push(0);
+          result.Push(0);
+      }
+
+      TestAddHelper(lhs, rhs, result);
   }
 
   public static void TestAddNegative()
@@ -269,6 +289,10 @@ public class Test
 
     assert tokenList.get(0).GetType() == E_Token.BIGINT;
     assert tokenList.get(0).GetValueInt() == 378;
+
+    input = "20000000000";
+    tokenList = tokenizer.Parse(input);
+    assert tokenList.get(0).GetValue().toString().equals(input);
   }
 
   public static void TokenizerCanParseTwoInt()
@@ -331,8 +355,6 @@ public class Test
 
     boolean parseResult = testStatement.Parse(inputTokenList);
 
-    //System.out.println("Result is " + parseResult);
-
     assert parseResult == true;
   }
 
@@ -379,8 +401,6 @@ public class Test
 
     BigInteger value = testStatement.GetValue();
 
-    System.out.println("Value is " + value.GetInt());
-
     assert value.GetInt() == 10;
   }
 
@@ -391,6 +411,10 @@ public class Test
     BigInteger result = Calculator.Run(input);
 
     assert result.GetInt() == 10;
+
+    input = "10000000000";
+    result = Calculator.Run(input);
+    assert result.toString().equals(input);
   }
 
   public static void CalculatorCanGetMinusValue()
@@ -409,6 +433,14 @@ public class Test
     BigInteger result = Calculator.Run(input);
 
     assert result.GetInt() == 25;
+  }
+
+  public static void CalculatorCanAddLong()
+  {
+      String input = "10000000000 + 20000000000";
+      BigInteger result = Calculator.Run(input);
+
+      assert result.toString().equals("30000000000");
   }
 
   public static void CalculatorCanSub()
