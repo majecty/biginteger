@@ -217,7 +217,13 @@ public class BigInteger
 
   public BigInteger GetClone()
   {
-    return new BigInteger(value);
+      BigInteger clone = new BigInteger(0);
+      for(int i=0; i<data.length; i++)
+      {
+          clone.data[i] = data[i];
+      }
+      clone.value = value;
+    return clone;
   }
 
 	public static void main(String args[])
@@ -256,6 +262,8 @@ public class BigInteger
 	// 위의 main 함수를 완벽하게 이해한 뒤 이 함수의 내용을 자유롭게 구성해보라.
 	private static void calculate(String input)
 	{
+            BigInteger result = Calculator.Run(input);
+            System.out.println(result.toString());
 		// 아래 코드는 입력을 정상적으로 받는지 테스트하는 부분이다.
 
 		// TODO : Main 함수를 이해했다면 아래 문장을 삭제하고 구현해라.
