@@ -12,6 +12,7 @@ public class Test
     TestBigIntEquality();
     TestAddBigInteger();
     TestAddNegative();
+    TestSub();
     TestMul();
     TestMulMany();
     TestAddLong();
@@ -116,6 +117,17 @@ public class Test
 
       BigInteger expected = new BigInteger(2);
       BigInteger actual = lhs.Add(rhs);
+
+      assert actual.IsEqual(expected);
+  }
+
+  public static void TestSub()
+  {
+      BigInteger lhs = new BigInteger(10);
+      BigInteger rhs = new BigInteger(13);
+
+      BigInteger expected = new BigInteger(-3);
+      BigInteger actual = lhs.Sub(rhs);
 
       assert actual.IsEqual(expected);
   }
