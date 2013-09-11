@@ -4,4 +4,5 @@ public enum E_Token
   BIGINT,
   PLUS,
   MINUS,
+  MUL,
 }

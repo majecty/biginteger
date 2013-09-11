@@ -21,6 +21,7 @@ public class Test
     TokenizerCanParsePlusSymbol();
     TokenizerCanParseInteger();
     TokenizerCanParseMinusSymbol();
+    TokenizerCanParseMulSymbol();
     TokenizerCanIgnoreSpace();
     TokenizerCanParseMoreThanTwoToken();
     TokenizerCanParsePlusAndBigIntTogether();
@@ -41,6 +42,7 @@ public class Test
     CalculatorCanAdd();
     CalculatorCanAddLong();
     CalculatorCanSub();
+    CalculatorCanMul();
     CalculatorCanAddTestMany();
     CalculatorCanSubTestMany();
 
@@ -221,6 +223,16 @@ public class Test
       ArrayList<Token> tokenList = tokenizer.Parse(input);
 
       assert tokenList.get(0).GetType() == E_Token.MINUS;
+  }
+
+  public static void TokenizerCanParseMulSymbol()
+  {
+      Tokenizer tokenizer = new Tokenizer();
+      String input = "*";
+
+      ArrayList<Token> tokenList = tokenizer.Parse(input);
+
+      assert tokenList.get(0).GetType() == E_Token.MUL;
   }
 
   public static void TokenizerCanParseInteger()
@@ -450,6 +462,15 @@ public class Test
       BigInteger result = Calculator.Run(input);
 
       assert result.GetInt() == 5;
+  }
+
+  public static void CalculatorCanMul()
+  {
+      String input = "10 * 15";
+
+      BigInteger result = Calculator.Run(input);
+
+      assert result.toString().equals("150");
   }
 
   public static void CalculatorCanAddTestMany()

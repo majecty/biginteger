@@ -47,6 +47,11 @@ public class Calculator
       return new BigInteger(lhs.value - rhs.value);
   }
 
+  public static BigInteger Mul(BigInteger lhs, BigInteger rhs)
+  {
+      return lhs.Mul(rhs);
+  }
+
   public static BigInteger Run(String input)
   {
     Symbol NUM = new Symbol("NUM");
@@ -64,6 +69,9 @@ public class Calculator
     Symbol OP_SUB = new Symbol("OP_SUB");
     OP_SUB.AddSyntax(SymbolList.Make(new Token(E_Token.MINUS)));
 
+    Symbol OP_MUL = new Symbol("OP_MUL");
+    OP_MUL.AddSyntax(SymbolList.Make(new Token(E_Token.MUL)));
+
     Statement onlyNumStatement = new Statement();
     onlyNumStatement.AddSyntax(SymbolList.Make(NUM));
 
@@ -73,11 +81,15 @@ public class Calculator
     Statement subStatement = new Statement();
     subStatement.AddSyntax(SymbolList.Make(NUM, OP_SUB, NUM));
 
+    Statement mulStatement = new Statement();
+    mulStatement.AddSyntax(SymbolList.Make(NUM, OP_MUL, NUM));
+
     List<Statement> statements = new ArrayList<Statement>();
 
     statements.add(addStatement);
     statements.add(onlyNumStatement);
     statements.add(subStatement);
+    statements.add(mulStatement);
 
     Tokenizer tokenizer = new Tokenizer();
     List<Token> tokenList = tokenizer.Parse(input);
@@ -133,6 +145,10 @@ public class Calculator
       else if (op.name == "OP_SUB")
       {
           return Sub(num1.value, num2.value);
+      }
+      else if (op.name == "OP_MUL")
+      {
+          return Mul(num1.value, num2.value);
       }
 
       return null;

@@ -56,6 +56,12 @@ public class Tokenizer
               currentToken = new Token(E_Token.MINUS);
               isFull = true;
           }
+          else if (character == '*')
+          {
+              type = E_Token.MUL;
+              currentToken = new Token(E_Token.MUL);
+              isFull = true;
+          }
           else if (Character.isDigit(character))
           {
             currentToken = new Token(E_Token.BIGINT);
@@ -70,6 +76,9 @@ public class Tokenizer
           assert Character.isDigit(character);
           currentToken.AddTail(Character.getNumericValue(character));
           // Not Implemented.
+          break;
+        default:
+          assert false;
           break;
       }
     }
