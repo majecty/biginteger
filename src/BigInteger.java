@@ -16,6 +16,12 @@ public class BigInteger
     GetFromInt(value);
   }
 
+  public void ChangePlMa()
+  {
+      value = -value;
+      isMinus = !isMinus;
+  }
+
   public boolean IsEqual(BigInteger rhs)
   {
       for(int i=0; i<data.length; i++)
@@ -245,8 +251,9 @@ public class BigInteger
       {
           clone.data[i] = data[i];
       }
+      clone.isMinus = isMinus;
       clone.value = value;
-    return clone;
+        return clone;
   }
 
 	public static void main(String args[])

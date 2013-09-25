@@ -22,7 +22,9 @@ public class Calculator
                 {
                     if (minusCount % 2 == 1)
                     {
-                        return new BigInteger(data.value.value * -1);
+                        BigInteger ret = data.value.GetClone();
+                        ret.ChangePlMa();
+                        return ret;
                     }
                     else
                     {
